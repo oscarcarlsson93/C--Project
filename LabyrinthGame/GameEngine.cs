@@ -36,7 +36,7 @@ namespace LabyrinthGame
 
         public bool TryMovePlayer(Player player, ConsoleKeyInfo keyPressed)
         {
-            if (KeyPressIsValid(keyPressed)) // Kolla att knapptryckningen var en av pilarna
+            if (!KeyPressIsValid(keyPressed)) // Kolla att knapptryckningen var en av pilarna
                 return false;
 
             Kordinat newKordinat = NewCoordinateFromKeyPress(player.Kordinater, keyPressed);// ta fram kordinaten spelaren försöker flytta till (Baserat på spelarens nuvarande position och vilken pil)
@@ -87,15 +87,13 @@ namespace LabyrinthGame
         {
             int x = grid.GetLength(0);
             int y = grid.GetLength(1);
-            int pjäsX = 2;
-            int pjäsY = 1;
+           
 
             List<LabyrinthObject> labyrinthObjects = new List<LabyrinthObject>();
             labyrinthObjects = labyrinthObjects.Concat(players).Concat(targets).ToList();
 
-
+                
             int cordY = 0;
-
 
             for (int i = 0; i < y * 2 + 1; i++)
             {
@@ -145,7 +143,6 @@ namespace LabyrinthGame
 
                         if (j % 2 == 0)
                         {
-                            //if (cordY == pjäsY && cordX == pjäsX)
                             if (labyrinthObjects.Any(o => o.Kordinater.X == cordX && o.Kordinater.Y == cordY))
                             {
                                 var objectToPrint = labyrinthObjects.Find(o => o.Kordinater.X == cordX && o.Kordinater.Y == cordY);
