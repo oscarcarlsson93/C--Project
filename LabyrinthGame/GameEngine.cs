@@ -21,16 +21,19 @@ namespace LabyrinthGame
         {
             Players.Add(new Player()); // Skapar en ny spelare och lägger till den i listan med spelare
         }
+
         public void AddNewTargetToGame()
         {
             Targets.Add(new Target()); // Skapar en ny target och lägger till den i listan med target
         }
 
-        internal void TryMovePlayer(Player player, ConsoleKeyInfo keyPressed)
+        public void TryMovePlayer(Player player, ConsoleKeyInfo keyPressed)
         {
-
+            // Kolla att knapptryckningen var en av pilarna
+            // ta fram kordinaten spelaren försöker flytta till (Baserat på spelarens nuvarande position och vilken pil)
+            // kolla att den nya kordinaten inte är en vägg eller utanför spelplanen 
+            // flytta spelaren
         }
-
 
         public void PrintGrid() // Målar upp rutnätet inkl spelare och mål (olika färger?)
         {
