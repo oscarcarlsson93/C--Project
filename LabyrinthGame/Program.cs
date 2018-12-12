@@ -6,7 +6,7 @@ namespace LabyrinthGame
     {
         static void Main(string[] args)
         {
-            NewGame();
+           // NewGame();
         }
 
         private static void NewGame()
