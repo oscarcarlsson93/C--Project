@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace LabyrinthGame
@@ -58,12 +59,17 @@ namespace LabyrinthGame
             return kordinater;
         }
 
+
         public void PrintGrid(SquareStatus[,] grid, List<Player> players, List<Target> targets) // Målar upp rutnätet inkl spelare och mål (olika färger?)
         {
-            int x = 9;
-            int y = 9;
-            int pjäsX = 1;
-            int pjäsY = 2;
+            int x = grid.GetLength(0);
+            int y = grid.GetLength(1);
+            int pjäsX = 2;
+            int pjäsY = 1;
+
+            List<LabyrinthObject> labyrinthObjects = new List<LabyrinthObject>();
+            labyrinthObjects.Concat(players).Concat(targets);
+
                 
             int cordY = 0;
 
@@ -116,9 +122,11 @@ namespace LabyrinthGame
 
                         if (j % 2 == 0)
                         {
-                            if (cordY == pjäsY && cordX == pjäsX)
+                            //if (cordY == pjäsY && cordX == pjäsX)
+                            if (labyrinthObjects.Any(o => o.Kordinater.X == cordX && o.Kordinater.Y == cordY))
                             {
-                                Console.ForegroundColor = ConsoleColor.Green;
+                                var objectToPrint = labyrinthObjects.Find(o => o.Kordinater.X == cordX && o.Kordinater.Y == cordY);
+                                Console.ForegroundColor = objectToPrint.Color;
                                 Console.Write(" * ");
                                 Console.ForegroundColor = ConsoleColor.Gray;
                             }
