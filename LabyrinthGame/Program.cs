@@ -14,6 +14,8 @@ namespace LabyrinthGame
         {
             
             GameEngine game = new GameEngine();
+            game.AddNewPlayerToGame();
+            game.AddNewTargetToGame();
             game.PrintGrid(game.Grid, game.Players, game.Targets);
         }
 
@@ -22,6 +24,7 @@ namespace LabyrinthGame
             GameEngine game = new GameEngine();
             game.AddNewPlayerToGame();
             game.AddNewTargetToGame();
+
 
             while (true)  //GameLoop
             {

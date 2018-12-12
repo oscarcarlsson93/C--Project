@@ -14,8 +14,9 @@ namespace LabyrinthGame
             Name = "Player 1";
             Color = ConsoleColor.Blue;
             Tries = 0;
-            Kordinater.X = 1;
-            Kordinater.Y = 1;
+            Kordinater.X = 0;
+            Kordinater.Y = 0;
+            Symbol = '*';
 
         }
     }
