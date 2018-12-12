@@ -7,7 +7,7 @@ namespace LabyrinthGame
     class LabyrinthObject
     {
         public string Name { get; set; }
-        public int[] KordinaterXY { get; set; }
+        public Kordinat Kordinater;
         public ConsoleColor Color { get; set; }
         
     }
