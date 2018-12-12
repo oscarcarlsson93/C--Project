@@ -36,7 +36,7 @@ namespace LabyrinthGame
         }
 
 
-        public void PrintGrid() // Målar upp rutnätet inkl spelare och mål (olika färger?)
+        public void PrintGrid(SquareStatus[,] grid, List<Player> players, List<Target> targets) // Målar upp rutnätet inkl spelare och mål (olika färger?)
         {
             int x = 9;
             int y = 9;
