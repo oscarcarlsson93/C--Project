@@ -6,7 +6,9 @@ namespace LabyrinthGame
     {
         static void Main(string[] args)
         {
-            
+            Console.WriteLine("Hello Fellow Developers!");
         }
+
+        
     }
 }
