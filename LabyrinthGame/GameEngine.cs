@@ -68,7 +68,7 @@ namespace LabyrinthGame
             int pjäsY = 1;
 
             List<LabyrinthObject> labyrinthObjects = new List<LabyrinthObject>();
-            labyrinthObjects.Concat(players).Concat(targets);
+            labyrinthObjects = labyrinthObjects.Concat(players).Concat(targets).ToList();
 
                 
             int cordY = 0;
@@ -127,7 +127,7 @@ namespace LabyrinthGame
                             {
                                 var objectToPrint = labyrinthObjects.Find(o => o.Kordinater.X == cordX && o.Kordinater.Y == cordY);
                                 Console.ForegroundColor = objectToPrint.Color;
-                                Console.Write(" * ");
+                                Console.Write(" " + objectToPrint.Symbol + " ");
                                 Console.ForegroundColor = ConsoleColor.Gray;
                             }
                             else
