@@ -19,5 +19,10 @@ namespace LabyrinthGame
             Symbol = '*';
 
         }
+       public void MovePlayerToCoordinate(Kordinat movedCoordinate)
+        {
+            Kordinater.X = movedCoordinate.X;
+            Kordinater.Y = movedCoordinate.Y;
+        }
     }
 }

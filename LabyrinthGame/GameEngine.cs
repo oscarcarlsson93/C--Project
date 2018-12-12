@@ -37,8 +37,8 @@ namespace LabyrinthGame
 
             Kordinat newKordinat = NewCoordinateFromKeyPress(player.Kordinater, keyPressed);// ta fram kordinaten spelaren försöker flytta till (Baserat på spelarens nuvarande position och vilken pil)
 
-            if (CoordinatIsValidAndFree(player.Kordinater) == false)  // kolla att den nya kordinaten inte är en vägg eller utanför spelplanen 
-                return false;
+           // if (CoordinatIsValidAndFree(player.Kordinater) == false)  // kolla att den nya kordinaten inte är en vägg eller utanför spelplanen 
+               // return false;
 
             // flytta spelaren
  return true;
@@ -70,8 +70,7 @@ namespace LabyrinthGame
         {
             int x = grid.GetLength(0);
             int y = grid.GetLength(1);
-            int pjäsX = 2;
-            int pjäsY = 1;
+           
 
             List<LabyrinthObject> labyrinthObjects = new List<LabyrinthObject>();
             labyrinthObjects = labyrinthObjects.Concat(players).Concat(targets).ToList();
