@@ -6,9 +6,14 @@ namespace LabyrinthGame
     {
         static void Main(string[] args)
         {
-GameEngine game = new GameEngine();
-		game.PrintGrid();
-           // NewGame();
+            TestPrintGrid();
+            // NewGame();
+        }
+
+        private static void TestPrintGrid()
+        {
+            GameEngine game = new GameEngine();
+            game.PrintGrid();
         }
 
         private static void NewGame()
@@ -21,7 +26,7 @@ GameEngine game = new GameEngine();
             {
                 foreach (Player player in game.Players)
                 {
-                    
+
                     var keyPressed = Console.ReadKey(false);
                     game.TryMovePlayer(player, keyPressed);
 

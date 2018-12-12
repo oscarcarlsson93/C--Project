@@ -21,8 +21,18 @@ namespace LabyrinthGame
         {
             Players.Add(new Player()); // Skapar en ny spelare och lägger till den i listan med spelare
         }
+        public void AddNewTargetToGame()
+        {
+            Targets.Add(new Target()); // Skapar en ny target och lägger till den i listan med target
+        }
 
         internal void TryMovePlayer(Player player, ConsoleKeyInfo keyPressed)
+        {
+
+        }
+
+
+        public void PrintGrid() // Målar upp rutnätet inkl spelare och mål (olika färger?)
         {
             int x = 9;
             int y = 9;
@@ -118,18 +128,6 @@ namespace LabyrinthGame
                 Console.WriteLine(line);
 
             }
-
-
-        }
-
-        public void AddNewTargetToGame()
-        {
-            Targets.Add(new Target()); // Skapar en ny target och lägger till den i listan med target
-        }
-
-
-        public void PrintGrid() // Målar upp rutnätet inkl spelare och mål (olika färger?)
-        {
         }
     }
 }
