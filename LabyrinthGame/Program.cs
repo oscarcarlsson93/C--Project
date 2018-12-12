@@ -6,8 +6,8 @@ namespace LabyrinthGame
     {
         static void Main(string[] args)
         {
-            TestPrintGrid();
-            // NewGame();
+            //TestPrintGrid();
+            NewGame();
         }
 
         private static void TestPrintGrid()
@@ -35,8 +35,8 @@ namespace LabyrinthGame
                     do
                     {
                         keyPressed = Console.ReadKey(false);
-                    } while (game.KeyPressIsValid(keyPressed));
-                    Console.ReadKey(false);
+                    } while (!game.KeyPressIsValid(keyPressed));
+                    
 
                     game.TryMovePlayer(player, keyPressed);
                 }

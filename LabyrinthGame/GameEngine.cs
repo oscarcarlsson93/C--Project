@@ -85,6 +85,8 @@ namespace LabyrinthGame
 
         public void PrintGrid(SquareStatus[,] grid, List<Player> players, List<Target> targets) // Målar upp rutnätet inkl spelare och mål (olika färger?)
         {
+            Console.Clear();
+
             int x = grid.GetLength(0);
             int y = grid.GetLength(1);
            
