@@ -4,17 +4,17 @@ using System.Text;
 
 namespace LabyrinthGame
 {
-    enum SquareStatus {wall, free};
+   
     class Labyrint
     {
         public SquareStatus[,] Grid { get; set; }
 
-        public Labyrint()
+        internal static SquareStatus[,] GetNewTestGrid()
         {
-            Grid = new SquareStatus[3, 6] {
-                { SquareStatus.free, SquareStatus.free, SquareStatus.free, SquareStatus.free, SquareStatus.free, SquareStatus.free },
-                { SquareStatus.free, SquareStatus.wall, SquareStatus.free, SquareStatus.free, SquareStatus.free, SquareStatus.free },
-                { SquareStatus.free, SquareStatus.free, SquareStatus.free,SquareStatus.free, SquareStatus.free, SquareStatus.free } };
+            return new SquareStatus[3, 3] {
+                { SquareStatus.free, SquareStatus.free, SquareStatus.free },
+                { SquareStatus.free, SquareStatus.wall, SquareStatus.free },
+                { SquareStatus.free, SquareStatus.free, SquareStatus.free } };
         }
     }
 }

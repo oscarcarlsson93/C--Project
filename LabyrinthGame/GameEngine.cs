@@ -8,11 +8,11 @@ namespace LabyrinthGame
     {
         public List<Player> Players { get; set; } //Property som kan hålla en lista med spelare
         public List<Target> Targets { get; set; } //Property som kan hålla en lista med targets
-        public Labyrint Grid { get; set; } // Property som kan hålla en labyrint
+        public SquareStatus[,] Grid { get; set; } // Property som kan hålla en labyrint
 
         public GameEngine() //Konstruktor
         {
-            Grid = new Labyrint(); //Initierar en ny labyrint 
+            Grid = Labyrint.GetNewTestGrid(); ; //Initierar en ny labyrint 
             Players = new List<Player>(); // Initiera en tom lista med spelare
             Targets = new List<Target>(); // Initiera en tom lista med targets
         }
@@ -21,23 +21,25 @@ namespace LabyrinthGame
         {
             Players.Add(new Player()); // Skapar en ny spelare och lägger till den i listan med spelare
         }
+
         public void AddNewTargetToGame()
         {
             Targets.Add(new Target()); // Skapar en ny target och lägger till den i listan med target
         }
 
-        internal void TryMovePlayer(Player player, ConsoleKeyInfo keyPressed)
+        public void TryMovePlayer(Player player, ConsoleKeyInfo keyPressed)
         {
-
+            // Kolla att knapptryckningen var en av pilarna
+            // ta fram kordinaten spelaren försöker flytta till (Baserat på spelarens nuvarande position och vilken pil)
+            // kolla att den nya kordinaten inte är en vägg eller utanför spelplanen 
+            // flytta spelaren
         }
 
 
-        public void PrintGrid(Labyrint grid, List<Player> players, List<Target> targets) // Målar upp rutnätet inkl spelare och mål (olika färger?)
+        public void PrintGrid() // Målar upp rutnätet inkl spelare och mål (olika färger?)
         {
-            int x = grid.Grid.GetLength(0);
-            int y = grid.Grid.GetLength(1);
-            
-
+            int x = 9;
+            int y = 9;
             int pjäsX = 1;
             int pjäsY = 2;
                 
