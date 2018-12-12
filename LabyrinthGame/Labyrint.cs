@@ -11,10 +11,14 @@ namespace LabyrinthGame
 
         internal static SquareStatus[,] GetNewTestGrid()
         {
-            return new SquareStatus[3, 3] {
-                { SquareStatus.free, SquareStatus.free, SquareStatus.free },
-                { SquareStatus.free, SquareStatus.wall, SquareStatus.free },
-                { SquareStatus.free, SquareStatus.free, SquareStatus.free } };
+            return new SquareStatus[7, 7] {
+                { SquareStatus.free, SquareStatus.wall, SquareStatus.free, SquareStatus.free, SquareStatus.free, SquareStatus.free, SquareStatus.free },
+                { SquareStatus.free, SquareStatus.wall, SquareStatus.free, SquareStatus.free, SquareStatus.free, SquareStatus.free, SquareStatus.free },
+                { SquareStatus.free, SquareStatus.wall, SquareStatus.free, SquareStatus.free, SquareStatus.free, SquareStatus.free, SquareStatus.free },
+                { SquareStatus.free, SquareStatus.wall, SquareStatus.free, SquareStatus.free, SquareStatus.free, SquareStatus.free, SquareStatus.free },
+                { SquareStatus.free, SquareStatus.wall, SquareStatus.free, SquareStatus.free, SquareStatus.free, SquareStatus.free, SquareStatus.free },
+                { SquareStatus.free, SquareStatus.wall, SquareStatus.free, SquareStatus.free, SquareStatus.free, SquareStatus.free, SquareStatus.free },
+                { SquareStatus.free, SquareStatus.free, SquareStatus.free, SquareStatus.free, SquareStatus.free, SquareStatus.free, SquareStatus.free }};
         }
 
         internal static SquareStatus[,] GetNewTestGridRectangle()

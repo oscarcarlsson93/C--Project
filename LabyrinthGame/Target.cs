@@ -12,8 +12,8 @@ namespace LabyrinthGame
             Name = "EndObjective";
             Color = ConsoleColor.Red;
             Symbol = 'X';
-            Kordinater.X = 1;
-            Kordinater.Y = 1;
+            Kordinater.X = 3;
+            Kordinater.Y = 3;
         }
     }
 }
