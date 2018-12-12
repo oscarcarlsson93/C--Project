@@ -16,6 +16,7 @@ namespace LabyrinthGame
             Tries = 0;
             Kordinater.X = 1;
             Kordinater.Y = 1;
+            Symbol = '*';
 
         }
     }

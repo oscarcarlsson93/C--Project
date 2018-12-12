@@ -29,12 +29,34 @@ namespace LabyrinthGame
 
         public void TryMovePlayer(Player player, ConsoleKeyInfo keyPressed)
         {
+          Kordinat newKordinat = NewCoordinateFromKeyPress(player.Kordinater, keyPressed);
+           
             // Kolla att knapptryckningen var en av pilarna
             // ta fram kordinaten spelaren försöker flytta till (Baserat på spelarens nuvarande position och vilken pil)
             // kolla att den nya kordinaten inte är en vägg eller utanför spelplanen 
             // flytta spelaren
         }
 
+        private Kordinat NewCoordinateFromKeyPress(Kordinat kordinater, ConsoleKeyInfo keyPressed)
+        {
+            if (keyPressed.Key == ConsoleKey.UpArrow)
+            {
+               kordinater.Y = kordinater.Y - 1;                
+            }
+            if (keyPressed.Key == ConsoleKey.DownArrow)
+            {
+                kordinater.Y = kordinater.Y + 1;                
+            }
+            if (keyPressed.Key == ConsoleKey.RightArrow)
+            {
+                kordinater.X = kordinater.X + 1;                
+            }
+            if (keyPressed.Key == ConsoleKey.LeftArrow)
+            {
+                kordinater.X = kordinater.X - 1;
+            }
+            return kordinater;
+        }
 
         public void PrintGrid(SquareStatus[,] grid, List<Player> players, List<Target> targets) // Målar upp rutnätet inkl spelare och mål (olika färger?)
         {

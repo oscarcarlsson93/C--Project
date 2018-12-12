@@ -11,7 +11,7 @@ namespace LabyrinthGame
         {
             Name = "EndObjective";
             Color = ConsoleColor.Red;
-
+            Symbol = 'X';
         }
     }
 }
