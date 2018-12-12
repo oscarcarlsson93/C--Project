@@ -41,10 +41,11 @@ namespace LabyrinthGame
 
             Kordinat newKordinat = NewCoordinateFromKeyPress(player.Kordinater, keyPressed);// ta fram kordinaten spelaren försöker flytta till (Baserat på spelarens nuvarande position och vilken pil)
 
-            if (CoordinatIsValidAndFree(player.Kordinater) == false)  // kolla att den nya kordinaten inte är en vägg eller utanför spelplanen 
+            if (CoordinatIsValid(newKordinat) == false)  // kolla att den nya kordinaten inte är en vägg eller utanför spelplanen 
                return false;
-
-            player.MovePlayerToCoordinate(newKordinat); // flytta spelaren
+            if (CoordinatIsFree(newKordinat) == false)  // kolla att den nya kordinaten inte är en vägg eller utanför spelplanen 
+                return false;
+                player.MovePlayerToCoordinate(newKordinat); // flytta spelaren
 
             return true; // Har vi kommit hit har vi lyckatas flytta spelaren, returnerar true
         }
@@ -69,10 +70,16 @@ namespace LabyrinthGame
             return kordinater;
         }
 
-        private bool CoordinatIsValidAndFree(Kordinat kordinater)
+        private bool CoordinatIsValid(Kordinat kordinater)
         {
-            if (Grid.GetLength(0) < kordinater.X || Grid.GetLength(0) < kordinater.Y)
+            if (!(Grid.GetLength(0) > kordinater.X && Grid.GetLength(0) > kordinater.Y) && kordinater.X >= 0 && kordinater.Y >= 0)
                 return false;
+            
+            return true;
+        }
+
+        private bool CoordinatIsFree(Kordinat kordinater)
+        {
             if (Grid[kordinater.X, kordinater.Y] == SquareStatus.wall)
                 return false;
             return true;
