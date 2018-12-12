@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 
 namespace LabyrinthGame
 {
@@ -36,19 +37,55 @@ namespace LabyrinthGame
 
         public bool TryMovePlayer(Player player, ConsoleKeyInfo keyPressed)
         {
-            if (!KeyPressIsValid(keyPressed)) // Kolla att knapptryckningen var en av pilarna
-                return false;
-
             Kordinat newKordinat = NewCoordinateFromKeyPress(player.Kordinater, keyPressed);// ta fram kordinaten spelaren försöker flytta till (Baserat på spelarens nuvarande position och vilken pil)
 
             if (CoordinatIsValid(newKordinat) == false)  // kolla att den nya kordinaten inte är en vägg eller utanför spelplanen 
-               return false;
-            if (CoordinatIsFree(newKordinat) == false)  // kolla att den nya kordinaten inte är en vägg eller utanför spelplanen 
                 return false;
-                player.MovePlayerToCoordinate(newKordinat); // flytta spelaren
+
+            if (CoordinatIsEqualToTarget(newKordinat))
+            {
+                player.MovePlayerToCoordinate(newKordinat);
+                for (int i = 0; i < 3; i++)
+                {
+                    PrintGrid(ConsoleColor.Green);
+                    Console.Beep(2000, 500);
+                    Console.Clear();
+                    Thread.Sleep(100);
+                }
+                
+                return false;
+            }
+
+
+            if (CoordinatIsFree(newKordinat) == false)  // kolla att den nya kordinaten inte är en vägg eller utanför spelplanen 
+            {
+                var tempColorStorage = player.Color;
+                player.Color = ConsoleColor.Red;
+                player.MovePlayerToCoordinate(newKordinat);
+                for (int i = 0; i < 3; i++)
+                {
+                    PrintGrid(ConsoleColor.Red);
+                    Console.Beep(2000, 500);
+                    Console.Clear();
+                    Thread.Sleep(100);
+                    
+                }
+                player.Color = tempColorStorage;
+                player.MovePlayerToCoordinate(new Kordinat() { X = 0, Y = 0 });
+                return false;
+            }
+
+            player.MovePlayerToCoordinate(newKordinat); // flytta spelaren
 
             return true; // Har vi kommit hit har vi lyckatas flytta spelaren, returnerar true
         }
+
+        private bool CoordinatIsEqualToTarget(Kordinat newKordinat)
+        {
+            return Targets.Any(t => t.Kordinater.X == newKordinat.X && t.Kordinater.Y == newKordinat.Y);               
+                            
+        }
+
         private Kordinat NewCoordinateFromKeyPress(Kordinat kordinater, ConsoleKeyInfo keyPressed)
         {
             if (keyPressed.Key == ConsoleKey.UpArrow)
@@ -72,10 +109,9 @@ namespace LabyrinthGame
 
         private bool CoordinatIsValid(Kordinat kordinater)
         {
-            if (!(Grid.GetLength(0) > kordinater.X && Grid.GetLength(0) > kordinater.Y) && kordinater.X >= 0 && kordinater.Y >= 0)
-                return false;
-            
-            return true;
+            if (Grid.GetLength(0) > kordinater.X && Grid.GetLength(1) > kordinater.Y && kordinater.X >= 0 && kordinater.Y >= 0)
+                return true;
+            return false;
         }
 
         private bool CoordinatIsFree(Kordinat kordinater)
@@ -85,23 +121,24 @@ namespace LabyrinthGame
             return true;
         }
 
-        public void PrintGrid() 
+        public void PrintGrid()
         {
-            PrintGrid(Grid, Players, Targets);
+            PrintGrid(ConsoleColor.Gray);
         }
 
-        public void PrintGrid(SquareStatus[,] grid, List<Player> players, List<Target> targets) // Målar upp rutnätet inkl spelare och mål (olika färger?)
+        public void PrintGrid(ConsoleColor color) // Målar upp rutnätet inkl spelare och mål (olika färger?)
         {
             Console.Clear();
+            Console.ForegroundColor = color;
 
-            int x = grid.GetLength(0);
-            int y = grid.GetLength(1);
-           
+            int x = Grid.GetLength(0);
+            int y = Grid.GetLength(1);
+
 
             List<LabyrinthObject> labyrinthObjects = new List<LabyrinthObject>();
-            labyrinthObjects = labyrinthObjects.Concat(players).Concat(targets).ToList();
+            labyrinthObjects = labyrinthObjects.Concat(Players).Concat(Targets).ToList();
 
-                
+
             int cordY = 0;
 
             for (int i = 0; i < y * 2 + 1; i++)
@@ -157,7 +194,7 @@ namespace LabyrinthGame
                                 var objectToPrint = labyrinthObjects.Find(o => o.Kordinater.X == cordX && o.Kordinater.Y == cordY);
                                 Console.ForegroundColor = objectToPrint.Color;
                                 Console.Write(" " + objectToPrint.Symbol + " ");
-                                Console.ForegroundColor = ConsoleColor.Gray;
+                                Console.ForegroundColor = color;
                             }
                             else
                                 Console.Write("   ");
