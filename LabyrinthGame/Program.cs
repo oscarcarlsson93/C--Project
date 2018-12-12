@@ -29,7 +29,7 @@ namespace LabyrinthGame
                 {
 
                     var keyPressed = Console.ReadKey(false);
-                    game.TryMovePlayer(player, keyPressed);
+                   // game.TryMovePlayer(player, keyPressed);
 
                 }
 

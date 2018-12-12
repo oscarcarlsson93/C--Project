@@ -4,7 +4,7 @@ using System.Text;
 
 namespace LabyrinthGame
 {
-   
+
     class Labyrint
     {
         public SquareStatus[,] Grid { get; set; }
@@ -15,6 +15,13 @@ namespace LabyrinthGame
                 { SquareStatus.free, SquareStatus.free, SquareStatus.free },
                 { SquareStatus.free, SquareStatus.wall, SquareStatus.free },
                 { SquareStatus.free, SquareStatus.free, SquareStatus.free } };
+        }
+
+        internal static SquareStatus[,] GetNewTestGridRectangle()
+        {
+            return new SquareStatus[2, 3] {
+                { SquareStatus.free, SquareStatus.free, SquareStatus.free },
+                { SquareStatus.free, SquareStatus.wall, SquareStatus.free }};
         }
     }
 }

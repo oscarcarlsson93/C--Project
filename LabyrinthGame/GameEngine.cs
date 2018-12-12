@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace LabyrinthGame
@@ -27,19 +28,36 @@ namespace LabyrinthGame
             Targets.Add(new Target()); // Skapar en ny target och lägger till den i listan med target
         }
 
-        public void TryMovePlayer(Player player, ConsoleKeyInfo keyPressed)
+        public bool TryMovePlayer(Player player, ConsoleKeyInfo keyPressed)
         {
-            // Kolla att knapptryckningen var en av pilarna
+            List<ConsoleKey> validKeys = new List<ConsoleKey>() { ConsoleKey.UpArrow, ConsoleKey.DownArrow, ConsoleKey.RightArrow, ConsoleKey.LeftArrow };
+
+            if (validKeys.Contains(keyPressed.Key) == false) // Kolla att knapptryckningen var en av pilarna
+                return false;
+
             // ta fram kordinaten spelaren försöker flytta till (Baserat på spelarens nuvarande position och vilken pil)
-            // kolla att den nya kordinaten inte är en vägg eller utanför spelplanen 
+
+            if (CoordinatIsValidAndFree(player.Kordinater) == false)  // kolla att den nya kordinaten inte är en vägg eller utanför spelplanen 
+                return false;
+
             // flytta spelaren
+
+            return true;
         }
 
+        private bool CoordinatIsValidAndFree(Kordinat kordinater)
+        {
+            if (Grid.GetLength(0) < kordinater.X || Grid.GetLength(0) < kordinater.Y)
+                return false;
+            if (Grid[kordinater.X, kordinater.Y] == SquareStatus.wall)
+                return false;
+            return true;
+        }
 
         public void PrintGrid(SquareStatus[,] grid, List<Player> players, List<Target> targets) // Målar upp rutnätet inkl spelare och mål (olika färger?)
         {
-            int x = 9;
-            int y = 9;
+            int x = Grid.GetLength(0);
+            int y = Grid.GetLength(1);
             int pjäsX = 1;
             int pjäsY = 2;
                 

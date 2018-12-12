@@ -4,7 +4,8 @@ using System.Text;
 
 namespace LabyrinthGame
 {
-    enum SquareStatus { wall, free };
+    enum SquareStatus { wall, free }
+
     struct Kordinat
     {
         public int X;
