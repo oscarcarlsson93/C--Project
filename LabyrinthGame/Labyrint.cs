@@ -4,7 +4,7 @@ using System.Text;
 
 namespace LabyrinthGame
 {
-    enum SquareStatus {wall, free};
+   
     class Labyrint
     {
         public SquareStatus[,] Grid { get; set; }
