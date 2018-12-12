@@ -30,34 +30,34 @@ namespace LabyrinthGame
 
         public bool TryMovePlayer(Player player, ConsoleKeyInfo keyPressed)
         {
-             List<ConsoleKey> validKeys = new List<ConsoleKey>() { ConsoleKey.UpArrow, ConsoleKey.DownArrow, ConsoleKey.RightArrow, ConsoleKey.LeftArrow };
+            List<ConsoleKey> validKeys = new List<ConsoleKey>() { ConsoleKey.UpArrow, ConsoleKey.DownArrow, ConsoleKey.RightArrow, ConsoleKey.LeftArrow };
 
             if (validKeys.Contains(keyPressed.Key) == false) // Kolla att knapptryckningen var en av pilarna
                 return false;
 
             Kordinat newKordinat = NewCoordinateFromKeyPress(player.Kordinater, keyPressed);// ta fram kordinaten spelaren försöker flytta till (Baserat på spelarens nuvarande position och vilken pil)
 
-           // if (CoordinatIsValidAndFree(player.Kordinater) == false)  // kolla att den nya kordinaten inte är en vägg eller utanför spelplanen 
-               // return false;
+            if (CoordinatIsValidAndFree(player.Kordinater) == false)  // kolla att den nya kordinaten inte är en vägg eller utanför spelplanen 
+                return false;
 
             // flytta spelaren
- return true;
+            return true;
 
-       
+
         }
         private Kordinat NewCoordinateFromKeyPress(Kordinat kordinater, ConsoleKeyInfo keyPressed)
         {
             if (keyPressed.Key == ConsoleKey.UpArrow)
             {
-               kordinater.Y = kordinater.Y - 1;                
+                kordinater.Y = kordinater.Y - 1;
             }
             if (keyPressed.Key == ConsoleKey.DownArrow)
             {
-                kordinater.Y = kordinater.Y + 1;                
+                kordinater.Y = kordinater.Y + 1;
             }
             if (keyPressed.Key == ConsoleKey.RightArrow)
             {
-                kordinater.X = kordinater.X + 1;                
+                kordinater.X = kordinater.X + 1;
             }
             if (keyPressed.Key == ConsoleKey.LeftArrow)
             {
@@ -75,9 +75,7 @@ namespace LabyrinthGame
             List<LabyrinthObject> labyrinthObjects = new List<LabyrinthObject>();
             labyrinthObjects = labyrinthObjects.Concat(players).Concat(targets).ToList();
 
-                
             int cordY = 0;
-
 
             for (int i = 0; i < y * 2 + 1; i++)
             {
@@ -127,7 +125,6 @@ namespace LabyrinthGame
 
                         if (j % 2 == 0)
                         {
-                            //if (cordY == pjäsY && cordX == pjäsX)
                             if (labyrinthObjects.Any(o => o.Kordinater.X == cordX && o.Kordinater.Y == cordY))
                             {
                                 var objectToPrint = labyrinthObjects.Find(o => o.Kordinater.X == cordX && o.Kordinater.Y == cordY);
