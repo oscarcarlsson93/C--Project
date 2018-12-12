@@ -30,10 +30,15 @@ namespace LabyrinthGame
             {
                 foreach (Player player in game.Players)
                 {
+                    game.PrintGrid();
+                    ConsoleKeyInfo keyPressed;
+                    do
+                    {
+                        keyPressed = Console.ReadKey(false);
+                    } while (game.KeyPressIsValid(keyPressed));
+                    Console.ReadKey(false);
 
-                    var keyPressed = Console.ReadKey(false);
-                   // game.TryMovePlayer(player, keyPressed);
-
+                    game.TryMovePlayer(player, keyPressed);
                 }
 
 

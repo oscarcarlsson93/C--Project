@@ -28,42 +28,59 @@ namespace LabyrinthGame
             Targets.Add(new Target()); // Skapar en ny target och lägger till den i listan med target
         }
 
+        public bool KeyPressIsValid(ConsoleKeyInfo keyPressed)
+        {
+            List<ConsoleKey> validKeys = new List<ConsoleKey>() { ConsoleKey.UpArrow, ConsoleKey.DownArrow, ConsoleKey.RightArrow, ConsoleKey.LeftArrow };
+            return validKeys.Contains(keyPressed.Key);
+        }
+
         public bool TryMovePlayer(Player player, ConsoleKeyInfo keyPressed)
         {
-             List<ConsoleKey> validKeys = new List<ConsoleKey>() { ConsoleKey.UpArrow, ConsoleKey.DownArrow, ConsoleKey.RightArrow, ConsoleKey.LeftArrow };
-
-            if (validKeys.Contains(keyPressed.Key) == false) // Kolla att knapptryckningen var en av pilarna
+            if (KeyPressIsValid(keyPressed)) // Kolla att knapptryckningen var en av pilarna
                 return false;
 
             Kordinat newKordinat = NewCoordinateFromKeyPress(player.Kordinater, keyPressed);// ta fram kordinaten spelaren försöker flytta till (Baserat på spelarens nuvarande position och vilken pil)
 
             if (CoordinatIsValidAndFree(player.Kordinater) == false)  // kolla att den nya kordinaten inte är en vägg eller utanför spelplanen 
-                return false;
+               return false;
 
-            // flytta spelaren
- return true;
+            player.MovePlayerToCoordinate(newKordinat); // flytta spelaren
 
-       
+            return true; // Har vi kommit hit har vi lyckatas flytta spelaren, returnerar true
         }
         private Kordinat NewCoordinateFromKeyPress(Kordinat kordinater, ConsoleKeyInfo keyPressed)
         {
             if (keyPressed.Key == ConsoleKey.UpArrow)
             {
-               kordinater.Y = kordinater.Y - 1;                
+                kordinater.Y = kordinater.Y - 1;
             }
             if (keyPressed.Key == ConsoleKey.DownArrow)
             {
-                kordinater.Y = kordinater.Y + 1;                
+                kordinater.Y = kordinater.Y + 1;
             }
             if (keyPressed.Key == ConsoleKey.RightArrow)
             {
-                kordinater.X = kordinater.X + 1;                
+                kordinater.X = kordinater.X + 1;
             }
             if (keyPressed.Key == ConsoleKey.LeftArrow)
             {
                 kordinater.X = kordinater.X - 1;
             }
             return kordinater;
+        }
+
+        private bool CoordinatIsValidAndFree(Kordinat kordinater)
+        {
+            if (Grid.GetLength(0) < kordinater.X || Grid.GetLength(0) < kordinater.Y)
+                return false;
+            if (Grid[kordinater.X, kordinater.Y] == SquareStatus.wall)
+                return false;
+            return true;
+        }
+
+        public void PrintGrid() 
+        {
+            PrintGrid(Grid, Players, Targets);
         }
 
         public void PrintGrid(SquareStatus[,] grid, List<Player> players, List<Target> targets) // Målar upp rutnätet inkl spelare och mål (olika färger?)
@@ -76,7 +93,7 @@ namespace LabyrinthGame
             List<LabyrinthObject> labyrinthObjects = new List<LabyrinthObject>();
             labyrinthObjects = labyrinthObjects.Concat(players).Concat(targets).ToList();
 
-                
+
             int cordY = 0;
 
 
