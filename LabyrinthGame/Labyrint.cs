@@ -11,10 +11,10 @@ namespace LabyrinthGame
 
         public Labyrint()
         {
-            Grid = new SquareStatus[3, 3] {
-                { SquareStatus.free, SquareStatus.free, SquareStatus.free },
-                { SquareStatus.free, SquareStatus.wall, SquareStatus.free },
-                { SquareStatus.free, SquareStatus.free, SquareStatus.free } };
+            Grid = new SquareStatus[3, 6] {
+                { SquareStatus.free, SquareStatus.free, SquareStatus.free, SquareStatus.free, SquareStatus.free, SquareStatus.free },
+                { SquareStatus.free, SquareStatus.wall, SquareStatus.free, SquareStatus.free, SquareStatus.free, SquareStatus.free },
+                { SquareStatus.free, SquareStatus.free, SquareStatus.free,SquareStatus.free, SquareStatus.free, SquareStatus.free } };
         }
     }
 }

@@ -32,38 +32,40 @@ namespace LabyrinthGame
         }
 
 
-        public void PrintGrid() // Målar upp rutnätet inkl spelare och mål (olika färger?)
+        public void PrintGrid(Labyrint grid, List<Player> players, List<Target> targets) // Målar upp rutnätet inkl spelare och mål (olika färger?)
         {
-            int x = 9;
-            int y = 9;
+            int x = grid.Grid.GetLength(0);
+            int y = grid.Grid.GetLength(1);
+            
+
             int pjäsX = 1;
-            int pjäsY = 3;
-            int cordX = 0;
+            int pjäsY = 2;
+                
+            int cordY = 0;
 
 
-            for (int i = 0; i < x * 2 + 1; i++)
+            for (int i = 0; i < y * 2 + 1; i++)
             {
-                int cordY = 0;
+                int cordX = 0;
 
                 string line = "";
 
                 if (i == 0)
                     line += "╔";
 
-                else if (i == x * 2)
+                else if (i == y * 2)
                     line += "╚";
 
                 else if (i % 2 != 0)
                 {
                     Console.Write("║");
-                    cordX++;
                 }
 
                 else if (i % 2 == 0)
                     line += "╠";
 
 
-                for (int j = 0; j < y * 2 - 1; j++)
+                for (int j = 0; j < x * 2 - 1; j++)
                 {
                     if (i % 2 == 0)
                     {
@@ -77,16 +79,12 @@ namespace LabyrinthGame
                             if (i == 0)
                                 line += "╦";
 
-                            else if (i == x * 2)
+                            else if (i == y * 2)
                                 line += "╩";
 
                             else
                                 line += "╬";
                         }
-
-
-
-
 
                     }
                     if (i % 2 != 0)
@@ -94,15 +92,15 @@ namespace LabyrinthGame
 
                         if (j % 2 == 0)
                         {
-                            cordY++;
-                            if (cordX == pjäsX && cordY == pjäsY)
+                            if (cordY == pjäsY && cordX == pjäsX)
                             {
                                 Console.ForegroundColor = ConsoleColor.Green;
-                                Console.Write(" ֍ ");
+                                Console.Write(" * ");
                                 Console.ForegroundColor = ConsoleColor.Gray;
                             }
                             else
                                 Console.Write("   ");
+                            cordX++;
                         }
                         else
                         {
@@ -113,12 +111,13 @@ namespace LabyrinthGame
                 if (i == 0)
                     line += "╗";
 
-                else if (i == x * 2)
+                else if (i == y * 2)
                     line += "╝";
 
                 else if (i % 2 != 0)
                 {
                     Console.Write("║");
+                    cordY++;
 
                 }
 

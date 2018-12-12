@@ -13,7 +13,7 @@ namespace LabyrinthGame
         private static void TestPrintGrid()
         {
             GameEngine game = new GameEngine();
-            game.PrintGrid();
+            game.PrintGrid(game.Grid, game.Players, game.Targets);
         }
 
         private static void NewGame()
