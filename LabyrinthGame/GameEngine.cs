@@ -8,11 +8,11 @@ namespace LabyrinthGame
     {
         public List<Player> Players { get; set; } //Property som kan hålla en lista med spelare
         public List<Target> Targets { get; set; } //Property som kan hålla en lista med targets
-        public Labyrint Grid { get; set; } // Property som kan hålla en labyrint
+        public SquareStatus[,] Grid { get; set; } // Property som kan hålla en labyrint
 
         public GameEngine() //Konstruktor
         {
-            Grid = new Labyrint(); //Initierar en ny labyrint 
+            Grid = Labyrint.GetNewTestGrid(); ; //Initierar en ny labyrint 
             Players = new List<Player>(); // Initiera en tom lista med spelare
             Targets = new List<Target>(); // Initiera en tom lista med targets
         }

@@ -9,9 +9,9 @@ namespace LabyrinthGame
     {
         public SquareStatus[,] Grid { get; set; }
 
-        public Labyrint()
+        internal static SquareStatus[,] GetNewTestGrid()
         {
-            Grid = new SquareStatus[3, 3] {
+            return new SquareStatus[3, 3] {
                 { SquareStatus.free, SquareStatus.free, SquareStatus.free },
                 { SquareStatus.free, SquareStatus.wall, SquareStatus.free },
                 { SquareStatus.free, SquareStatus.free, SquareStatus.free } };
