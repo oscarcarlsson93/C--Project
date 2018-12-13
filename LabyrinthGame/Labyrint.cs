@@ -62,7 +62,7 @@ namespace LabyrinthGame
             gameGrid[0, cord.Y - 1] = SquareStatus.free;
             gameGrid[cord.X - 1, 0] = SquareStatus.free;
             gameGrid[cord.X - 1, cord.Y - 1] = SquareStatus.free;
-            return bigGrid;
+            return gameGrid;
         }
     }
 }

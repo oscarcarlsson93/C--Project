@@ -105,9 +105,9 @@ namespace LabyrinthGame
 
                 Console.WriteLine(line);
 
-                PrintGameBar(Players, player);
 
             }
+                PrintGameBar(Players, player);
         }
         public static void PrintGameBar(List<Player> Players, Player activePlayer)
         {

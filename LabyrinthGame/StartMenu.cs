@@ -9,15 +9,16 @@ namespace LabyrinthGame
     {
         public static void Menue(GameEngine game)
         {
-            ConsoleColor.Red.ToString();
 
-            var StartMenueList = new List<string> { "Start menue", $"Select number of players (now {game.Players.Count} players)", "Select grid size", "Start game" };
+            var StartMenueList = new List<string> { "Start menue", $"Select number of players", "Select grid size", "Start game" };
 
-            PrintMenue(StartMenueList);
-            var pressedKey = Console.ReadKey();
+          
 
             while (true)
             {
+                PrintMenue(StartMenueList);
+                var pressedKey = Console.ReadKey();
+
                 switch (pressedKey.Key)
                 {
                     case ConsoleKey.D1:
@@ -49,14 +50,14 @@ namespace LabyrinthGame
 
                 string userInput = Console.ReadLine();
 
-                if (Regex.IsMatch(userInput, "^[5-25]?,[5-25]$"))
-                {
+                //if (Regex.IsMatch(userInput, "^[25-5]?,[25-5]$"))
+                //{
                     var userInputSplitted = userInput.Split(',');
                     Kordinat selectedGridSize = new Kordinat();
                     selectedGridSize.X = int.Parse(userInputSplitted[0]);
                     selectedGridSize.Y = int.Parse(userInputSplitted[1]);
                     return selectedGridSize;
-                }
+                //}
             }
         }
 
@@ -80,7 +81,7 @@ namespace LabyrinthGame
             Console.Clear();
             Console.WriteLine(Environment.NewLine + menu[0] + Environment.NewLine); // Prints menue title
 
-            for (int i = 1; i <= menu.Count; i++) // Prints the menue options
+            for (int i = 1; i < menu.Count; i++) // Prints the menue options
             {
                 Console.WriteLine($"{i}. {menu[i]}");
             }
