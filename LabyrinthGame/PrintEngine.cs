@@ -7,7 +7,7 @@ namespace LabyrinthGame
 {
     class PrintEngine
     {
-        public static void PrintGrid(ConsoleColor color, List<Player> Players, List<Target> Targets, SquareStatus[,] Grid) // Målar upp rutnätet inkl spelare och mål (olika färger?)
+        public static void PrintGrid(ConsoleColor color, List<Player> Players, List<Target> Targets, SquareStatus[,] Grid, Player player) // Målar upp rutnätet inkl spelare och mål (olika färger?)
         {
             Console.Clear();
             Console.ForegroundColor = color;
@@ -105,16 +105,30 @@ namespace LabyrinthGame
 
                 Console.WriteLine(line);
 
-                PrintGameBar(Players);
+                PrintGameBar(Players, player);
 
             }
         }
-        public static void PrintGameBar(List<Player> Players)
+        public static void PrintGameBar(List<Player> Players, Player activePlayer)
         {
+            Console.WriteLine();
+
             foreach (var player in Players)
             {
-                Console.ForegroundColor = player.Color;
-                Console.Write(player.Symbol + " " + player.Points + " " );
+                if(player == activePlayer)
+                    Console.ForegroundColor = player.Color;
+
+                else
+                    Console.ForegroundColor = ConsoleColor.Gray;
+
+                Console.Write(player.Symbol + " ");
+
+                Console.ForegroundColor = ConsoleColor.Gray;
+
+                if (player.Points == 1)
+                    Console.Write(player.Points + " point \t" );
+                else
+                    Console.Write(player.Points + " point \t" );
             }
         }
 

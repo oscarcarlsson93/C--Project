@@ -47,7 +47,7 @@ namespace LabyrinthGame
                 player.MovePlayerToCoordinate(newKordinat);
                 for (int i = 0; i < 3; i++)
                 {
-                    PrintGrid(ConsoleColor.Green);
+                    PrintGrid(ConsoleColor.Green, player);
                     Console.Beep(2000, 500);
                     Console.Clear();
                     Thread.Sleep(100);
@@ -63,7 +63,7 @@ namespace LabyrinthGame
                 player.MovePlayerToCoordinate(newKordinat);
                 for (int i = 0; i < 3; i++)
                 {
-                    PrintGrid(ConsoleColor.Red);
+                    PrintGrid(ConsoleColor.Red, player);
                     Console.Beep(2000, 500);
                     Console.Clear();
                     Thread.Sleep(100);
@@ -120,14 +120,14 @@ namespace LabyrinthGame
             return true;
         }
 
-        public void PrintGrid()
+        public void PrintGrid(Player player)
         {
-            PrintGrid(ConsoleColor.Gray);
+            PrintGrid(ConsoleColor.Gray, player);
         }
 
-        public void PrintGrid(ConsoleColor color) // Målar upp rutnätet inkl spelare och mål (olika färger?)
+        public void PrintGrid(ConsoleColor color, Player player) // Målar upp rutnätet inkl spelare och mål (olika färger?)
         {
-            PrintEngine.PrintGrid(color, Players, Targets, Grid);            
+            PrintEngine.PrintGrid(color, Players, Targets, Grid, player);            
         }
     }
 }

@@ -32,7 +32,7 @@ namespace LabyrinthGame
             {
                 foreach (Player player in game.Players)
                 {
-                    game.PrintGrid();
+                    game.PrintGrid(player);
                     ConsoleKeyInfo keyPressed;
                     do
                     {

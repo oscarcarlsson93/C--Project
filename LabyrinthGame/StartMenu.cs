@@ -51,7 +51,7 @@ namespace LabyrinthGame
                 {
                     var userInputSplitted = userInput.Split(',');
                     Kordinat selectedGridSize = new Kordinat();
-                    selectedGridSize.X = 
+                    //selectedGridSize.X = 
                     
                     
                 }
