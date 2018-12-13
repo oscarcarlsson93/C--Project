@@ -137,10 +137,31 @@ namespace LabyrinthGame
             Console.WriteLine(new string('=', Players.Count*16));
             Console.Write(activePlayer.Symbol);
             Console.ForegroundColor = ConsoleColor.Gray;
-            Console.Write("  It's your turn!");
+            Console.Write(" : It's your turn!");
+        }
+        public static void PrintWinScreen(List<Player> players)
+        {
+            Console.Clear();
+            int winPoints = players.Max(p => p.Points);
+            Player winner = players.Find(p => p.Points == winPoints);
+
+            foreach (var player in players)
+            {
+                Console.ForegroundColor = player.Color;
+                Console.Write(player.Symbol);
+                Console.ForegroundColor = ConsoleColor.Gray;
+                if (player.Points == 1)
+                    Console.Write(": " + player.Points + " point \t");
+                else
+                    Console.Write(": " + player.Points + " points \t");
+            }
+            Console.WriteLine();
+            Console.ForegroundColor = winner.Color;
+            Console.WriteLine(new string(winner.Symbol, 1000) + "\n\n\n" + "\t\t\t" + winner.Symbol);
+            Console.ForegroundColor = ConsoleColor.Gray;
+            Console.Write(": You are the champion!");
 
 
         }
-
     }
 }
