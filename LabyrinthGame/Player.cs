@@ -10,8 +10,22 @@ namespace LabyrinthGame
         public int Tries { get; set; }
 
         public Player()
-        {           
-            Color = ConsoleColor.Blue;
+        {                                               // Sätta Foreground-color i stringen(Console.Foregroundcolor = ConsoleColor.Blue  == ConsoleColor.Blue.ToString();
+            var ChoosePlayerColor = new List<string> { "Choose your color", ConsoleColor.Blue.ToString(), ConsoleColor.Yellow.ToString(), ConsoleColor.Cyan.ToString(), ConsoleColor.Magenta.ToString() };
+            StartMenu.PrintMenue(ChoosePlayerColor);
+
+
+            ConsoleKeyInfo pressedKey;
+            do
+            {
+                pressedKey = Console.ReadKey();
+            } while (!(pressedKey.Key == ConsoleKey.D1 || pressedKey.Key == ConsoleKey.D2 || pressedKey.Key == ConsoleKey.D3 || pressedKey.Key == ConsoleKey.D4));
+            int playerColor = int.Parse(pressedKey.KeyChar.ToString());
+
+
+
+
+            Color = Enum.Parse<ConsoleColor>(ChoosePlayerColor[playerColor]);
             Tries = 0;
             Kordinater.X = 0;
             Kordinater.Y = 0;
@@ -24,8 +38,8 @@ namespace LabyrinthGame
         }
         public void SetPlayerStartingPosition(Kordinat playerStartingPosition)
         {
-            Kordinater.X = playerStartingPosition.X;
-            Kordinater.Y = playerStartingPosition.Y;
+            startingPosition.X = playerStartingPosition.X;
+            startingPosition.Y = playerStartingPosition.Y;
         }
         public void SetPlayerSymbol(char playerSymbol)
         {
@@ -34,6 +48,11 @@ namespace LabyrinthGame
         public void SetPlayerColor(ConsoleColor consoleColor)
         {
             Color = consoleColor;
+        }
+        public void ResetPlayerPosition()
+        {
+            Kordinater.X = startingPosition.X;
+            Kordinater.Y = startingPosition.Y;
         }
     }
 }

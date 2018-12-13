@@ -47,7 +47,7 @@ namespace LabyrinthGame
             return int.Parse(pressedKey.KeyChar.ToString());
         }
 
-        private static void PrintMenue(List<string> menu)
+        public static void PrintMenue(List<string> menu)
         {
             Console.WriteLine(Environment.NewLine + menu[0] + Environment.NewLine); // Prints menue title
 
