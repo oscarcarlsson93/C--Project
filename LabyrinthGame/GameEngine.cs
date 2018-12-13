@@ -14,9 +14,23 @@ namespace LabyrinthGame
 
         public GameEngine() //Konstruktor
         {
-            Grid = Labyrint.GetGrid(new Kordinat {X=9, Y=9 }); //Initierar en ny labyrint 
-            Players = new List<Player>(); // Initiera en tom lista med spelare
+            StartMenu.Menue(this);
+
+            Players[0].SetPlayerStartingPosition(new Kordinat() { X = 0, Y = 0 });
+
+            if (Players.Count < 1)
+                Players[1].SetPlayerStartingPosition(new Kordinat() { X = Grid.GetLength(0) - 1, Y = Grid.GetLength(1) -1});
+            if (Players.Count < 2)
+                Players[2].SetPlayerStartingPosition(new Kordinat() { X = 0, Y = Grid.GetLength(1) - 1 });
+            if (Players.Count < 3)
+                Players[3].SetPlayerStartingPosition(new Kordinat() { X = Grid.GetLength(0) - 1, Y = 0 });
+
             Targets = new List<Target>(); // Initiera en tom lista med targets
+            Targets.Add(new Target());
+            foreach (Target target in Targets)
+            {
+                target.SetRandomTargetPosition(Grid);
+            }
         }
 
         public void AddNewPlayerToGame()

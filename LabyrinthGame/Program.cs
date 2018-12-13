@@ -24,8 +24,6 @@ namespace LabyrinthGame
         private static void NewGame()
         {
             GameEngine game = new GameEngine();
-            game.AddNewPlayerToGame();
-            game.AddNewTargetToGame();
 
 
             while (true)  //GameLoop

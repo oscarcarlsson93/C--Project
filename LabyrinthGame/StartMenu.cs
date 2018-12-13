@@ -7,7 +7,7 @@ namespace LabyrinthGame
 {
     class StartMenu
     {
-        public static GameEngine Menue(GameEngine game)
+        public static void Menue(GameEngine game)
         {
             ConsoleColor.Red.ToString();
 
@@ -16,23 +16,25 @@ namespace LabyrinthGame
             PrintMenue(StartMenueList);
             var pressedKey = Console.ReadKey();
 
-
             while (true)
             {
                 switch (pressedKey.Key)
                 {
                     case ConsoleKey.D1:
+                        var players = new List<Player>();
                         int numberOfPlayersSelected = SelectNumerOfPlayersMenue();
                         for (int i = 0; i < numberOfPlayersSelected; i++)
-                            game.Players.Add(new Player());
+                        {
+                            players.Add(new Player());
+                        }
+                        game.Players = players;
                         break;
                     case ConsoleKey.D2:
                         Kordinat selectedSize = SelectLabyrintSize();
                         game.Grid = Labyrint.GetGrid(selectedSize);
                         break;
                     case ConsoleKey.D3:
-                        return game;
-
+                        return;
                 }
             }
         }
@@ -46,18 +48,16 @@ namespace LabyrinthGame
                 Console.Write(Environment.NewLine + "Enter labyrint size: "); // Prints menue title
 
                 string userInput = Console.ReadLine();
-                userInput = userInput.Trim();
-                if (Regex.IsMatch(userInput, "^[1-9][0-9]?,[1-9][0-9]?$"))
+
+                if (Regex.IsMatch(userInput, "^[5-25]?,[5-25]$"))
                 {
                     var userInputSplitted = userInput.Split(',');
                     Kordinat selectedGridSize = new Kordinat();
-                    selectedGridSize.X = 
-                    
-                    
+                    selectedGridSize.X = int.Parse(userInputSplitted[0]);
+                    selectedGridSize.Y = int.Parse(userInputSplitted[1]);
+                    return selectedGridSize;
                 }
-
             }
-
         }
 
         public static int SelectNumerOfPlayersMenue()
@@ -77,7 +77,6 @@ namespace LabyrinthGame
 
         public static void PrintMenue(List<string> menu)
         {
-
             Console.Clear();
             Console.WriteLine(Environment.NewLine + menu[0] + Environment.NewLine); // Prints menue title
 

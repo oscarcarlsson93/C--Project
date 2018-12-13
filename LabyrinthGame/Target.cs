@@ -12,14 +12,17 @@ namespace LabyrinthGame
             Name = "EndObjective";
             Color = ConsoleColor.Green;
             Symbol = '☺';
-            Kordinater.X = 3;
-            Kordinater.Y = 3;
+           
         }
 
-        public void SetRandomTargetPosition(Kordinat targetPosition)
+        public void SetRandomTargetPosition(SquareStatus[,] grid)
         {
-            Kordinater.X = targetPosition.X;
-            Kordinater.Y = targetPosition.Y;    
+            Random rnd = new Random();
+            int randomX = rnd.Next(1, grid.GetLength(0) - 2);
+            int randomY = rnd.Next(1, grid.GetLength(0) - 2); ;
+
+            Kordinater.X = randomX;
+            Kordinater.Y = randomY;
         }
     }
 }
