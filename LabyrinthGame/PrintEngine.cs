@@ -14,7 +14,7 @@ namespace LabyrinthGame
 
             int x = Grid.GetLength(0);
             int y = Grid.GetLength(1);
-            
+
 
             List<LabyrinthObject> labyrinthObjects = new List<LabyrinthObject>();
             labyrinthObjects = labyrinthObjects.Concat(Players).Concat(Targets).ToList();
@@ -107,7 +107,7 @@ namespace LabyrinthGame
 
 
             }
-                PrintGameBar(Players, player);
+            PrintGameBar(Players, player);
         }
         public static void PrintGameBar(List<Player> Players, Player activePlayer)
         {
@@ -115,7 +115,7 @@ namespace LabyrinthGame
 
             foreach (var player in Players)
             {
-                if(player == activePlayer)
+                if (player == activePlayer)
                     Console.ForegroundColor = player.Color;
 
                 else
@@ -126,10 +126,20 @@ namespace LabyrinthGame
                 Console.ForegroundColor = ConsoleColor.Gray;
 
                 if (player.Points == 1)
-                    Console.Write(player.Points + " point \t" );
+                    Console.Write(player.Points + " point \t");
                 else
-                    Console.Write(player.Points + " points \t" );
+                    Console.Write(player.Points + " points \t");
+
             }
+
+            Console.ForegroundColor = activePlayer.Color;
+            Console.WriteLine();
+            Console.WriteLine(new string('=', Players.Count*16));
+            Console.Write(activePlayer.Symbol);
+            Console.ForegroundColor = ConsoleColor.Gray;
+            Console.Write("  It's your turn!");
+
+
         }
 
     }
