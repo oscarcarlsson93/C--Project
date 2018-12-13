@@ -12,21 +12,16 @@ namespace LabyrinthGame
         public List<Target> Targets { get; set; } //Property som kan hålla en lista med targets
         public SquareStatus[,] Grid { get; set; } // Property som kan hålla en labyrint
 
+
         public GameEngine() //Konstruktor
         {
             StartMenu.Menue(this);
 
-            Players[0].SetPlayerStartingPosition(new Kordinat() { X = 0, Y = 0 });
-
-            if (Players.Count > 1)
-                Players[1].SetPlayerStartingPosition(new Kordinat() { X = Grid.GetLength(0) - 1, Y = Grid.GetLength(1) -1});
-            if (Players.Count > 2)
-                Players[2].SetPlayerStartingPosition(new Kordinat() { X = 0, Y = Grid.GetLength(1) - 1 });
-            if (Players.Count > 3)
-                Players[3].SetPlayerStartingPosition(new Kordinat() { X = Grid.GetLength(0) - 1, Y = 0 });
+            SetStartingPositionsForPlayers();
 
             Targets = new List<Target>(); // Initiera en tom lista med targets
             Targets.Add(new Target());
+
             foreach (Target target in Targets)
             {
                 target.SetRandomTargetPosition(Grid);
@@ -42,6 +37,14 @@ namespace LabyrinthGame
         {
             Targets.Add(new Target()); // Skapar en ny target och lägger till den i listan med target
         }
+
+        public void SetStartingPositionsForPlayers()
+        {
+            var startingPositions = new Kordinat[] { new Kordinat { X = 0, Y = 0 }, new Kordinat { X = Grid.GetLength(0) - 1, Y = Grid.GetLength(1) - 1 }, new Kordinat { X = 0, Y = Grid.GetLength(1) - 1 }, new Kordinat { X = Grid.GetLength(0) - 1, Y = 0 } };
+            for (int i = 0; i < Players.Count; i++)
+                Players[i].SetPlayerStartingPosition(startingPositions[i]); 
+        }
+
 
         public bool KeyPressIsValid(ConsoleKeyInfo keyPressed)
         {
@@ -141,7 +144,7 @@ namespace LabyrinthGame
 
         public void PrintGrid(ConsoleColor color, Player player) // Målar upp rutnätet inkl spelare och mål (olika färger?)
         {
-            PrintEngine.PrintGrid(color, Players, Targets, Grid, player);            
+            PrintEngine.PrintGrid(color, Players, Targets, Grid, player);
         }
     }
 }
