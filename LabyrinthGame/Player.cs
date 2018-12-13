@@ -23,14 +23,16 @@ namespace LabyrinthGame
             } while (!(pressedKey.Key == ConsoleKey.D1 || pressedKey.Key == ConsoleKey.D2 || pressedKey.Key == ConsoleKey.D3 || pressedKey.Key == ConsoleKey.D4));
             int playerColor = int.Parse(pressedKey.KeyChar.ToString());
 
-
-
+            Console.WriteLine("Choose your character");
+            string playerSymbol = Console.ReadLine();
+            char symbol = playerSymbol[0];
+           
 
             Color = Enum.Parse<ConsoleColor>(ChoosePlayerColor[playerColor]);
             Tries = 0;
             Kordinater.X = 0;
             Kordinater.Y = 0;
-            Symbol = '❶';
+            Symbol = symbol;
             Points = 0;
         }
         public void MovePlayerToCoordinate(Kordinat movedCoordinate)
