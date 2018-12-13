@@ -30,8 +30,8 @@ namespace LabyrinthGame
 
             Color = Enum.Parse<ConsoleColor>(ChoosePlayerColor[playerColor]);
             Tries = 0;
-            Kordinater.X = 0;
-            Kordinater.Y = 0;
+            
+           
             Symbol = symbol;
             Points = 0;
         }
@@ -44,6 +44,7 @@ namespace LabyrinthGame
         {
             startingPosition.X = playerStartingPosition.X;
             startingPosition.Y = playerStartingPosition.Y;
+            MovePlayerToCoordinate(startingPosition);
         }
         public void SetPlayerSymbol(char playerSymbol)
         {
