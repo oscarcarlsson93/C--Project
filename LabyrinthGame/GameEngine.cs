@@ -11,6 +11,7 @@ namespace LabyrinthGame
         public List<Player> Players { get; set; } //Property som kan hålla en lista med spelare
         public List<Target> Targets { get; set; } //Property som kan hålla en lista med targets
         public SquareStatus[,] Grid { get; set; } // Property som kan hålla en labyrint
+        public const int PointsToWin = 3;
 
 
         public GameEngine() //Konstruktor
@@ -20,12 +21,12 @@ namespace LabyrinthGame
             SetStartingPositionsForPlayers();
 
             Targets = new List<Target>(); // Initiera en tom lista med targets
-            Targets.Add(new Target());
+            AddNewTargetToGame();
+        }
 
-            foreach (Target target in Targets)
-            {
-                target.SetRandomTargetPosition(Grid);
-            }
+        internal bool SomeoneHasWon()
+        {
+            return Players.Max(p => p.Points) == PointsToWin;
         }
 
         public void AddNewPlayerToGame()
@@ -36,13 +37,15 @@ namespace LabyrinthGame
         public void AddNewTargetToGame()
         {
             Targets.Add(new Target()); // Skapar en ny target och lägger till den i listan med target
+            foreach (Target target in Targets)
+                target.SetRandomTargetPosition(Grid);
         }
 
         public void SetStartingPositionsForPlayers()
         {
             var startingPositions = new Kordinat[] { new Kordinat { X = 0, Y = 0 }, new Kordinat { X = Grid.GetLength(0) - 1, Y = Grid.GetLength(1) - 1 }, new Kordinat { X = 0, Y = Grid.GetLength(1) - 1 }, new Kordinat { X = Grid.GetLength(0) - 1, Y = 0 } };
             for (int i = 0; i < Players.Count; i++)
-                Players[i].SetPlayerStartingPosition(startingPositions[i]); 
+                Players[i].SetPlayerStartingPosition(startingPositions[i]);
         }
 
 
@@ -56,36 +59,34 @@ namespace LabyrinthGame
         {
             Kordinat newKordinat = NewCoordinateFromKeyPress(player.Kordinater, keyPressed);// ta fram kordinaten spelaren försöker flytta till (Baserat på spelarens nuvarande position och vilken pil)
 
-            if (CoordinatIsValid(newKordinat) == false)  // kolla att den nya kordinaten inte är en vägg eller utanför spelplanen 
-                return false;
+            if (CoordinatIsNOTValid(newKordinat))  // kolla om den nya kordinaten är utanför spelplanen 
+                return false; // Inget mer utförs, dvs spelarens pjäs flyttas inte
 
             if (CoordinatIsEqualToTarget(newKordinat))
             {
                 player.MovePlayerToCoordinate(newKordinat);
-                for (int i = 0; i < 3; i++)
+                PrintGrid(ConsoleColor.Green, player);
+                Console.Beep(2000, 500);
+                player.Points++;
+                foreach (Target target in Targets)
                 {
-                    PrintGrid(ConsoleColor.Green, player);
-                    Console.Beep(2000, 500);
-                    Console.Clear();
-                    Thread.Sleep(100);
+                    target.SetRandomTargetPosition(Grid);
                 }
                 return false;
             }
 
 
-            if (CoordinatIsFree(newKordinat) == false)  // kolla att den nya kordinaten inte är en vägg eller utanför spelplanen 
+            if (CoordinatIsNOTFree(newKordinat))  // kolla om den nya kordinaten är en vägg  
             {
                 var tempColorStorage = player.Color;
                 player.Color = ConsoleColor.Red;
                 player.MovePlayerToCoordinate(newKordinat);
-                for (int i = 0; i < 3; i++)
-                {
-                    PrintGrid(ConsoleColor.Red, player);
-                    Console.Beep(2000, 500);
-                    Console.Clear();
-                    Thread.Sleep(100);
 
-                }
+                PrintGrid(ConsoleColor.Red, player);
+                Console.Beep(2000, 500);
+                Console.Clear();
+                Thread.Sleep(100);
+
                 player.Color = tempColorStorage;
                 player.MovePlayerToCoordinate(player.startingPosition);
                 return false;
@@ -99,7 +100,6 @@ namespace LabyrinthGame
         private bool CoordinatIsEqualToTarget(Kordinat newKordinat)
         {
             return Targets.Any(t => t.Kordinater.X == newKordinat.X && t.Kordinater.Y == newKordinat.Y);
-
         }
 
         private Kordinat NewCoordinateFromKeyPress(Kordinat kordinater, ConsoleKeyInfo keyPressed)
@@ -123,18 +123,18 @@ namespace LabyrinthGame
             return kordinater;
         }
 
-        private bool CoordinatIsValid(Kordinat kordinater)
+        private bool CoordinatIsNOTValid(Kordinat kordinater)
         {
             if (Grid.GetLength(0) > kordinater.X && Grid.GetLength(1) > kordinater.Y && kordinater.X >= 0 && kordinater.Y >= 0)
-                return true;
-            return false;
-        }
-
-        private bool CoordinatIsFree(Kordinat kordinater)
-        {
-            if (Grid[kordinater.X, kordinater.Y] == SquareStatus.wall)
                 return false;
             return true;
+        }
+
+        private bool CoordinatIsNOTFree(Kordinat kordinater)
+        {
+            if (Grid[kordinater.X, kordinater.Y] == SquareStatus.wall)
+                return true;
+            return false;
         }
 
         public void PrintGrid(Player player)
