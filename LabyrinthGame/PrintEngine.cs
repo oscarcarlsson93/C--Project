@@ -105,6 +105,16 @@ namespace LabyrinthGame
 
                 Console.WriteLine(line);
 
+                PrintGameBar(Players);
+
+            }
+        }
+        public static void PrintGameBar(List<Player> Players)
+        {
+            foreach (var player in Players)
+            {
+                Console.ForegroundColor = player.Color;
+                Console.Write(player.Symbol + " " + player.Points + " " );
             }
         }
 
