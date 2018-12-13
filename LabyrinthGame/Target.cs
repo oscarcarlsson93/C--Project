@@ -18,8 +18,8 @@ namespace LabyrinthGame
         public void SetRandomTargetPosition(SquareStatus[,] grid)
         {
             Random rnd = new Random();
-            int randomX = rnd.Next(1, grid.GetLength(0) - 2);
-            int randomY = rnd.Next(1, grid.GetLength(0) - 2); ;
+            int randomX = rnd.Next(1, grid.GetLength(0) - 1);
+            int randomY = rnd.Next(1, grid.GetLength(1) - 1); ;
 
             Kordinater.X = randomX;
             Kordinater.Y = randomY;

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 
 namespace LabyrinthGame
 {
@@ -155,11 +156,18 @@ namespace LabyrinthGame
                 else
                     Console.Write(": " + player.Points + " points \t");
             }
-            Console.WriteLine();
+            Console.WriteLine("\n\n\n\n\n");
             Console.ForegroundColor = winner.Color;
-            Console.WriteLine(new string(winner.Symbol, 1000) + "\n\n\n" + "\t\t\t" + winner.Symbol);
+            for (int i = 0; i < 200; i++)
+            {
+                Console.Write(winner.Symbol + "    ");
+            }
+            Console.WriteLine("\n\n\n\t\t\t\t" + winner.Symbol);
             Console.ForegroundColor = ConsoleColor.Gray;
-            Console.Write(": You are the champion!");
+            Console.WriteLine("\t\t\tYou are the champion!");
+            Console.WriteLine();
+
+            Thread.Sleep(5000);
 
 
         }

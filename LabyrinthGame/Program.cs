@@ -37,7 +37,9 @@ namespace LabyrinthGame
                         keyPressed = Console.ReadKey(false);
                     } while (!game.KeyPressIsValid(keyPressed));
                     game.TryMovePlayer(player, keyPressed);
-                    if(game.SomeoneHasWon()) break;
+                    if (game.SomeoneHasWon())
+                        PrintEngine.PrintWinScreen(game.Players);
+                        break;
                 }
             }
         }
