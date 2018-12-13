@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Text.RegularExpressions;
 
 namespace LabyrinthGame
 {
@@ -15,6 +16,7 @@ namespace LabyrinthGame
             PrintMenue(StartMenueList);
             var pressedKey = Console.ReadKey();
 
+
             while (true)
             {
                 switch (pressedKey.Key)
@@ -25,6 +27,8 @@ namespace LabyrinthGame
                             game.Players.Add(new Player());
                         break;
                     case ConsoleKey.D2:
+                        Kordinat selectedSize = SelectLabyrintSize();
+                        game.Grid = Labyrint.GetGrid(selectedSize);
                         break;
                     case ConsoleKey.D3:
                         return game;
@@ -33,8 +37,32 @@ namespace LabyrinthGame
             }
         }
 
-        private static int SelectNumerOfPlayersMenue()
+        private static Kordinat SelectLabyrintSize()
         {
+            while (true)
+            {
+                Console.Clear();
+                Console.WriteLine("Labyrint Height and Width can not be larger than 25 or lesser than 5.\nEnter labyrint height and width below separated by a comma (exampel '9,12')");
+                Console.Write(Environment.NewLine + "Enter labyrint size: "); // Prints menue title
+
+                string userInput = Console.ReadLine();
+                userInput = userInput.Trim();
+                if (Regex.IsMatch(userInput, "^[1-9][0-9]?,[1-9][0-9]?$"))
+                {
+                    var userInputSplitted = userInput.Split(',');
+                    Kordinat selectedGridSize = new Kordinat();
+                    selectedGridSize.X = 
+                    
+                    
+                }
+
+            }
+
+        }
+
+        public static int SelectNumerOfPlayersMenue()
+        {
+
             var selectNumberOfPlayersMenu = new List<string> { "Select the numbers of players", "1 player", "2 players", "3 players", "4 players" };
 
             PrintMenue(selectNumberOfPlayersMenu);
@@ -47,8 +75,10 @@ namespace LabyrinthGame
             return int.Parse(pressedKey.KeyChar.ToString());
         }
 
-        private static void PrintMenue(List<string> menu)
+        public static void PrintMenue(List<string> menu)
         {
+
+            Console.Clear();
             Console.WriteLine(Environment.NewLine + menu[0] + Environment.NewLine); // Prints menue title
 
             for (int i = 1; i <= menu.Count; i++) // Prints the menue options
