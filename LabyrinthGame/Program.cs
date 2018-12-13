@@ -26,7 +26,7 @@ namespace LabyrinthGame
             GameEngine game = new GameEngine();
 
 
-            while (true)  //GameLoop
+            while (game.SomeoneHasWon() == false)  //GameLoop
             {
                 foreach (Player player in game.Players)
                 {
@@ -36,12 +36,9 @@ namespace LabyrinthGame
                     {
                         keyPressed = Console.ReadKey(false);
                     } while (!game.KeyPressIsValid(keyPressed));
-                    
-
                     game.TryMovePlayer(player, keyPressed);
+                    if(game.SomeoneHasWon()) break;
                 }
-
-
             }
         }
     }

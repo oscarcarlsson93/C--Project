@@ -12,8 +12,6 @@ namespace LabyrinthGame
 
             var StartMenueList = new List<string> { "Start menue", $"Select number of players", "Select grid size", "Start game" };
 
-          
-
             while (true)
             {
                 PrintMenue(StartMenueList);
@@ -22,13 +20,12 @@ namespace LabyrinthGame
                 switch (pressedKey.Key)
                 {
                     case ConsoleKey.D1:
-                        var players = new List<Player>();
                         int numberOfPlayersSelected = SelectNumerOfPlayersMenue();
+                        game.Players = new List<Player>();
                         for (int i = 0; i < numberOfPlayersSelected; i++)
                         {
-                            players.Add(new Player());
+                            game.Players.Add(new Player());
                         }
-                        game.Players = players;
                         break;
                     case ConsoleKey.D2:
                         Kordinat selectedSize = SelectLabyrintSize();
