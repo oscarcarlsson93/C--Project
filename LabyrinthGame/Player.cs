@@ -8,6 +8,7 @@ namespace LabyrinthGame
     {
         public Kordinat startingPosition;
         public int Tries { get; set; }
+        public int Points { get; set; }
 
         public Player()
         {                                               // Sätta Foreground-color i stringen(Console.Foregroundcolor = ConsoleColor.Blue  == ConsoleColor.Blue.ToString();
@@ -30,6 +31,7 @@ namespace LabyrinthGame
             Kordinater.X = 0;
             Kordinater.Y = 0;
             Symbol = '❶';
+            Points = 0;
         }
         public void MovePlayerToCoordinate(Kordinat movedCoordinate)
         {

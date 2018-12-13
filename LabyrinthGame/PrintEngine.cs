@@ -14,7 +14,7 @@ namespace LabyrinthGame
 
             int x = Grid.GetLength(0);
             int y = Grid.GetLength(1);
-
+            
 
             List<LabyrinthObject> labyrinthObjects = new List<LabyrinthObject>();
             labyrinthObjects = labyrinthObjects.Concat(Players).Concat(Targets).ToList();
@@ -105,6 +105,16 @@ namespace LabyrinthGame
 
                 Console.WriteLine(line);
 
+                PrintGameBar(Players);
+
+            }
+        }
+        public static void PrintGameBar(List<Player> Players)
+        {
+            foreach (var player in Players)
+            {
+                Console.ForegroundColor = player.Color;
+                Console.Write(player.Symbol + " " + player.Points + " " );
             }
         }
 
