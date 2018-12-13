@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading;
 
 namespace LabyrinthGame
 {
@@ -11,22 +12,26 @@ namespace LabyrinthGame
         public int Points { get; set; }
 
         public Player()
-        {                                               // Sätta Foreground-color i stringen(Console.Foregroundcolor = ConsoleColor.Blue  == ConsoleColor.Blue.ToString();
-            var ChoosePlayerColor = new List<string> { "Choose your color", ConsoleColor.Blue.ToString(), ConsoleColor.Yellow.ToString(), ConsoleColor.Cyan.ToString(), ConsoleColor.Magenta.ToString() };
+        {                                       // Sätta Foreground-color i stringen(Console.Foregroundcolor = ConsoleColor.Blue  == ConsoleColor.Blue.ToString();
+            var ChoosePlayerColor = new List<string> { "Choose your color", ConsoleColor.White.ToString(), ConsoleColor.Yellow.ToString(), ConsoleColor.Cyan.ToString(), ConsoleColor.Magenta.ToString() };
+            Console.WriteLine("NEW PLAYER");
             StartMenu.PrintMenue(ChoosePlayerColor);
 
 
             ConsoleKeyInfo pressedKey;
             do
             {
-                pressedKey = Console.ReadKey();
+                pressedKey = Console.ReadKey(true);
             } while (!(pressedKey.Key == ConsoleKey.D1 || pressedKey.Key == ConsoleKey.D2 || pressedKey.Key == ConsoleKey.D3 || pressedKey.Key == ConsoleKey.D4));
             int playerColor = int.Parse(pressedKey.KeyChar.ToString());
-
+            Console.WriteLine($"You have chosen the color {ChoosePlayerColor[playerColor]}");
             Console.WriteLine("Choose your character");
             string playerSymbol = Console.ReadLine();
             char symbol = playerSymbol[0];
-           
+            Console.WriteLine($"You have chosen the character {symbol}");
+            Thread.Sleep(2000);
+            
+
 
             Color = Enum.Parse<ConsoleColor>(ChoosePlayerColor[playerColor]);
             Tries = 0;
