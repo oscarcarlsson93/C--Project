@@ -14,7 +14,7 @@ namespace LabyrinthGame
 
         public GameEngine() //Konstruktor
         {
-            Grid = Labyrint.GetNewTestGrid(); ; //Initierar en ny labyrint 
+            Grid = Labyrint.GetGrid(new Kordinat {X=9, Y=9 }); //Initierar en ny labyrint 
             Players = new List<Player>(); // Initiera en tom lista med spelare
             Targets = new List<Target>(); // Initiera en tom lista med targets
         }
