@@ -128,7 +128,7 @@ namespace LabyrinthGame
                 if (player.Points == 1)
                     Console.Write(player.Points + " point \t" );
                 else
-                    Console.Write(player.Points + " point \t" );
+                    Console.Write(player.Points + " points \t" );
             }
         }
 
