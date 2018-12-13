@@ -14,7 +14,7 @@ namespace LabyrinthGame
 
             int x = Grid.GetLength(0);
             int y = Grid.GetLength(1);
-
+            
 
             List<LabyrinthObject> labyrinthObjects = new List<LabyrinthObject>();
             labyrinthObjects = labyrinthObjects.Concat(Players).Concat(Targets).ToList();
