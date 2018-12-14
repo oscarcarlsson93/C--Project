@@ -20,7 +20,7 @@ namespace LabyrinthGame
 
             SetStartingPositionsForPlayers();
 
-            AddTargetsToGame(1);
+            AddTargetsToGame(2);
         }
 
         private void InitializeGameWithStartMenue()
@@ -93,10 +93,8 @@ namespace LabyrinthGame
                 PrintGrid(ConsoleColor.Green, player);
                 Console.Beep(2000, 500);
                 player.Points++;
-                foreach (Target target in Targets)
-                {
-                    target.SetRandomTargetPosition(Grid);
-                }
+                Target reachedTarget = Targets.Find(t => t.Kordinater.X == newKordinat.X && t.Kordinater.Y == newKordinat.Y);
+                reachedTarget.SetRandomTargetPosition(Grid);
                 return false;
             }
 
