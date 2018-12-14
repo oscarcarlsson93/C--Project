@@ -19,8 +19,7 @@ namespace LabyrinthGame
             InitializeGameWithStartMenue();
 
             SetStartingPositionsForPlayers();
-
-            AddTargetsToGame(2);
+            SetStartingPositionsForTargets();
         }
 
         private void InitializeGameWithStartMenue()
@@ -32,12 +31,15 @@ namespace LabyrinthGame
                 switch (pressedKey.Key)
                 {
                     case ConsoleKey.D1:
-                        AddPlayersToGame(StartMenu.SelectNumerOfPlayersMenue());
+                        AddPlayersToGame(StartMenu.ShowSelectNumberOfPlayersMenuAndGetSelectedNumbersOfPlayers());
                         break;
                     case ConsoleKey.D2:
-                        Grid = Labyrint.GetGrid(StartMenu.SelectLabyrintSize());
+                        AddTargetsToGame(StartMenu.ShosSelectNumberOfTargetsMenueAndGetSelectedNumberOfTargets());
                         break;
                     case ConsoleKey.D3:
+                        Grid = Labyrint.GetGrid(StartMenu.ShosSelectSizeMenueAndGetSelectedSizeAsKordinat());
+                        break;
+                    case ConsoleKey.D4:
                         return;
                 }
             }
@@ -62,9 +64,12 @@ namespace LabyrinthGame
 
             for (int i = 0; i < numberOfTargets; i++)
                 Targets.Add(new Target());
+        }
 
+        public void SetStartingPositionsForTargets()
+        {
             foreach (Target target in Targets)
-                target.SetRandomTargetPosition(Grid);
+                target.SetRandomTargetPosition(Grid, Players, Targets);
         }
 
         public void SetStartingPositionsForPlayers()
@@ -94,7 +99,7 @@ namespace LabyrinthGame
                 Console.Beep(2000, 500);
                 player.Points++;
                 Target reachedTarget = Targets.Find(t => t.Kordinater.X == newKordinat.X && t.Kordinater.Y == newKordinat.Y);
-                reachedTarget.SetRandomTargetPosition(Grid);
+                reachedTarget.SetRandomTargetPosition(Grid,Players,Targets);
                 return false;
             }
 

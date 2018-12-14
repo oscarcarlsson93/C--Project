@@ -10,18 +10,18 @@ namespace LabyrinthGame
 
         public static ConsoleKeyInfo ShowStartMenueAndGetPressedKey()
         {
-            var StartMenueList = new List<string> { "Start menue", $"Select number of players", "Select grid size", "Start game" };
+            var StartMenueList = new List<string> { "Start menue", $"Select number of players","Select number of targets", "Select grid size", "Start game" };
             PrintMenue(StartMenueList);
             ConsoleKeyInfo pressedKey;
             do
             {
                 pressedKey = Console.ReadKey();
-            } while (!(pressedKey.Key == ConsoleKey.D1 || pressedKey.Key == ConsoleKey.D2 || pressedKey.Key == ConsoleKey.D3));
+            } while (!(pressedKey.Key == ConsoleKey.D1 || pressedKey.Key == ConsoleKey.D2 || pressedKey.Key == ConsoleKey.D3 || pressedKey.Key == ConsoleKey.D4));
 
             return pressedKey ;
         }
 
-        public static Kordinat SelectLabyrintSize()
+        public static Kordinat ShosSelectSizeMenueAndGetSelectedSizeAsKordinat()
         {
             while (true)
             {
@@ -42,7 +42,23 @@ namespace LabyrinthGame
             }
         }
 
-        public static int SelectNumerOfPlayersMenue()
+        public static int ShosSelectNumberOfTargetsMenueAndGetSelectedNumberOfTargets()
+        {
+            while (true)
+            {
+                Console.Clear();
+                Console.Write(Environment.NewLine + "Enter number of targets (1-9): "); // Prints menue title
+
+                string userInput = Console.ReadLine();
+
+                if (Regex.IsMatch(userInput, "^[1-9]$"))
+                {
+                    return int.Parse(userInput);
+                }
+            }
+        }
+
+        public static int ShowSelectNumberOfPlayersMenuAndGetSelectedNumbersOfPlayers()
         {
 
             var selectNumberOfPlayersMenu = new List<string> { "Select the numbers of players", "1 player", "2 players", "3 players", "4 players" };

@@ -9,14 +9,7 @@ namespace LabyrinthGame
             Console.OutputEncoding = System.Text.Encoding.UTF8;
             Console.InputEncoding = System.Text.Encoding.UTF8;
 
-            //TestPrintGrid();
             NewGame();
-        }
-
-        private static void TestPrintGrid()
-        {
-
-            GameEngine game = new GameEngine();
         }
 
         private static void NewGame()
