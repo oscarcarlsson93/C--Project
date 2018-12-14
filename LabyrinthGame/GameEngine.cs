@@ -20,7 +20,7 @@ namespace LabyrinthGame
 
             SetStartingPositionsForPlayers();
 
-            AddTargetsToGame(2);
+            AddTargetsToGame(1);
         }
 
         private void InitializeGameWithStartMenue()

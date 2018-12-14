@@ -25,18 +25,17 @@ namespace LabyrinthGame
             } while (!(pressedKey.Key == ConsoleKey.D1 || pressedKey.Key == ConsoleKey.D2 || pressedKey.Key == ConsoleKey.D3 || pressedKey.Key == ConsoleKey.D4));
             int playerColor = int.Parse(pressedKey.KeyChar.ToString());
             Console.WriteLine($"You have chosen the color {ChoosePlayerColor[playerColor]}");
+
             Console.WriteLine("Choose your character");
             string playerSymbol = Console.ReadLine();
             char symbol = playerSymbol[0];
             Console.WriteLine($"You have chosen the character {symbol}");
-            Thread.Sleep(2000);
+            Thread.Sleep(1500);
             
 
 
             Color = Enum.Parse<ConsoleColor>(ChoosePlayerColor[playerColor]);
-            Tries = 0;
-            
-           
+            Tries = 0;                       
             Symbol = symbol;
             Points = 0;
         }

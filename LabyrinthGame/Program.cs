@@ -21,6 +21,9 @@ namespace LabyrinthGame
 
         private static void NewGame()
         {
+            while (true)
+            {
+
             GameEngine game = new GameEngine();
 
 
@@ -42,6 +45,7 @@ namespace LabyrinthGame
                         break;
                     }
                 }
+            }
             }
         }
     }
