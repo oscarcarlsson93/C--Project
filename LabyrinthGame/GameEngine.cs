@@ -152,7 +152,7 @@ namespace LabyrinthGame
 
         private bool CoordinatIsNOTValid(Kordinat kordinater)
         {
-            if (Grid.GetLength(0) > kordinater.X && Grid.GetLength(1) > kordinater.Y && kordinater.X >= 0 && kordinater.Y >= 0)
+            if (!Players.Any(p => p.Kordinater.X == kordinater.X && p.Kordinater.Y == kordinater.Y) && Grid.GetLength(0) > kordinater.X && Grid.GetLength(1) > kordinater.Y && kordinater.X >= 0 && kordinater.Y >= 0)
                 return false;
             return true;
         }
