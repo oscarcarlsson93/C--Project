@@ -32,7 +32,7 @@ namespace LabyrinthGame
                 do
                 {
                     pressedKey = Console.ReadKey(true);
-                } while (!(pressedKey.Key == ConsoleKey.D1 || pressedKey.Key == ConsoleKey.D2 || pressedKey.Key == ConsoleKey.D3 || pressedKey.Key == ConsoleKey.D4));
+                } while (!StartMenu.ValidKeys().Exists(k => k == pressedKey.Key));
                 int playerColor = int.Parse(pressedKey.KeyChar.ToString());
                 Console.WriteLine($"You have chosen the color {ChoosePlayerColor[playerColor]}");
 

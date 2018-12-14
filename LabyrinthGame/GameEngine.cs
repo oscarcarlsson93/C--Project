@@ -38,20 +38,20 @@ namespace LabyrinthGame
         {
             while (true)
             {
-                ConsoleKeyInfo pressedKey = StartMenu.ShowStartMenueAndGetPressedKey();
+                int pressedKey = StartMenu.ShowStartMenueAndGetPressedKey();
 
-                switch (pressedKey.Key)
+                switch (pressedKey)
                 {
-                    case ConsoleKey.D1:
+                    case 1:
                         AddPlayersToGame(StartMenu.ShowSelectNumberOfPlayersMenuAndGetSelectedNumbersOfPlayers());
                         break;
-                    case ConsoleKey.D2:
+                    case 2:
                         AddTargetsToGame(StartMenu.ShosSelectNumberOfTargetsMenueAndGetSelectedNumberOfTargets());
                         break;
-                    case ConsoleKey.D3:
+                    case 3:
                         Grid = Labyrint.GetGrid(StartMenu.ShosSelectSizeMenueAndGetSelectedSizeAsKordinat());
                         break;
-                    case ConsoleKey.D4:
+                    case 4:
                         return;
                 }
             }

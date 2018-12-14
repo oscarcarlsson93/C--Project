@@ -8,17 +8,23 @@ namespace LabyrinthGame
     class StartMenu
     {
 
-        public static ConsoleKeyInfo ShowStartMenueAndGetPressedKey()
+        public static int ShowStartMenueAndGetPressedKey()
         {
-            var StartMenueList = new List<string> { "Start menue", $"Select number of players","Select number of targets", "Select grid size", "Start game" };
+            var StartMenueList = new List<string> { "Start menue", $"Select number of players", "Select number of targets", "Select grid size", "Start game" };
             PrintMenue(StartMenueList);
             ConsoleKeyInfo pressedKey;
             do
             {
                 pressedKey = Console.ReadKey();
-            } while (!(pressedKey.Key == ConsoleKey.D1 || pressedKey.Key == ConsoleKey.D2 || pressedKey.Key == ConsoleKey.D3 || pressedKey.Key == ConsoleKey.D4));
+            } while (!ValidKeys().Exists(k => k == pressedKey.Key));
 
-            return pressedKey ;
+            return int.Parse(pressedKey.KeyChar.ToString());
+        }
+        
+        public static List<ConsoleKey> ValidKeys()
+        {
+            return new List<ConsoleKey>{ ConsoleKey.NumPad1 , ConsoleKey.NumPad2 , ConsoleKey.NumPad3 , ConsoleKey.NumPad4 , ConsoleKey.D1 , ConsoleKey.D2 , ConsoleKey.D3 , ConsoleKey.D4};
+
         }
 
         public static Kordinat ShosSelectSizeMenueAndGetSelectedSizeAsKordinat()
@@ -68,7 +74,7 @@ namespace LabyrinthGame
             do
             {
                 pressedKey = Console.ReadKey();
-            } while (!(pressedKey.Key == ConsoleKey.D1 || pressedKey.Key == ConsoleKey.D2 || pressedKey.Key == ConsoleKey.D3 || pressedKey.Key == ConsoleKey.D4));
+            } while (!ValidKeys().Exists(k => k == pressedKey.Key));
 
             return int.Parse(pressedKey.KeyChar.ToString());
         }
