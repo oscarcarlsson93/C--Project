@@ -14,7 +14,7 @@ namespace LabyrinthGame
         public Player()
         {                                       // Sätta Foreground-color i stringen(Console.Foregroundcolor = ConsoleColor.Blue  == ConsoleColor.Blue.ToString();
             var ChoosePlayerColor = new List<string> { "Choose your color", ConsoleColor.White.ToString(), ConsoleColor.Yellow.ToString(), ConsoleColor.Cyan.ToString(), ConsoleColor.Magenta.ToString() };
-            Console.WriteLine("NEW PLAYER");
+            
             StartMenu.PrintMenue(ChoosePlayerColor);
 
 
@@ -32,7 +32,6 @@ namespace LabyrinthGame
             Console.WriteLine($"You have chosen the character {symbol}");
             Thread.Sleep(1500);
             
-
 
             Color = Enum.Parse<ConsoleColor>(ChoosePlayerColor[playerColor]);
             Tries = 0;                       
