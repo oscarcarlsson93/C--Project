@@ -16,12 +16,31 @@ namespace LabyrinthGame
 
         public GameEngine() //Konstruktor
         {
-            StartMenu.Menue(this);
+            InitializeGameWithStartMenue();
 
             SetStartingPositionsForPlayers();
 
-            Targets = new List<Target>(); // Initiera en tom lista med targets
-            AddNewTargetToGame();
+            AddTargetsToGame(1);
+        }
+
+        private void InitializeGameWithStartMenue()
+        {
+            while (true)
+            {
+                ConsoleKeyInfo pressedKey = StartMenu.ShowStartMenueAndGetPressedKey();
+
+                switch (pressedKey.Key)
+                {
+                    case ConsoleKey.D1:
+                        AddPlayersToGame(StartMenu.SelectNumerOfPlayersMenue());
+                        break;
+                    case ConsoleKey.D2:
+                        Grid = Labyrint.GetGrid(StartMenu.SelectLabyrintSize());
+                        break;
+                    case ConsoleKey.D3:
+                        return;
+                }
+            }
         }
 
         internal bool SomeoneHasWon()
@@ -29,14 +48,21 @@ namespace LabyrinthGame
             return Players.Max(p => p.Points) == PointsToWin;
         }
 
-        public void AddNewPlayerToGame()
+        public void AddPlayersToGame(int numberOfPlayers)
         {
-            Players.Add(new Player()); // Skapar en ny spelare och lägger till den i listan med spelare
+            Players = new List<Player>();
+
+            for (int i = 0; i < numberOfPlayers; i++)
+                Players.Add(new Player());
         }
 
-        public void AddNewTargetToGame()
+        public void AddTargetsToGame(int numberOfTargets)
         {
-            Targets.Add(new Target()); // Skapar en ny target och lägger till den i listan med target
+            Targets = new List<Target>();
+
+            for (int i = 0; i < numberOfTargets; i++)
+                Targets.Add(new Target());
+
             foreach (Target target in Targets)
                 target.SetRandomTargetPosition(Grid);
         }
@@ -47,7 +73,6 @@ namespace LabyrinthGame
             for (int i = 0; i < Players.Count; i++)
                 Players[i].SetPlayerStartingPosition(startingPositions[i]);
         }
-
 
         public bool KeyPressIsValid(ConsoleKeyInfo keyPressed)
         {
@@ -74,7 +99,6 @@ namespace LabyrinthGame
                 }
                 return false;
             }
-
 
             if (CoordinatIsNOTFree(newKordinat))  // kolla om den nya kordinaten är en vägg  
             {

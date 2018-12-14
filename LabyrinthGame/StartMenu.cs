@@ -7,37 +7,21 @@ namespace LabyrinthGame
 {
     class StartMenu
     {
-        public static void Menue(GameEngine game)
+
+        public static ConsoleKeyInfo ShowStartMenueAndGetPressedKey()
         {
-
             var StartMenueList = new List<string> { "Start menue", $"Select number of players", "Select grid size", "Start game" };
-
-            while (true)
+            PrintMenue(StartMenueList);
+            ConsoleKeyInfo pressedKey;
+            do
             {
-                PrintMenue(StartMenueList);
-                var pressedKey = Console.ReadKey();
+                pressedKey = Console.ReadKey();
+            } while (!(pressedKey.Key == ConsoleKey.D1 || pressedKey.Key == ConsoleKey.D2 || pressedKey.Key == ConsoleKey.D3));
 
-                switch (pressedKey.Key)
-                {
-                    case ConsoleKey.D1:
-                        int numberOfPlayersSelected = SelectNumerOfPlayersMenue();
-                        game.Players = new List<Player>();
-                        for (int i = 0; i < numberOfPlayersSelected; i++)
-                        {
-                            game.Players.Add(new Player());
-                        }
-                        break;
-                    case ConsoleKey.D2:
-                        Kordinat selectedSize = SelectLabyrintSize();
-                        game.Grid = Labyrint.GetGrid(selectedSize);
-                        break;
-                    case ConsoleKey.D3:
-                        return;
-                }
-            }
+            return pressedKey ;
         }
 
-        private static Kordinat SelectLabyrintSize()
+        public static Kordinat SelectLabyrintSize()
         {
             while (true)
             {
@@ -47,14 +31,14 @@ namespace LabyrinthGame
 
                 string userInput = Console.ReadLine();
 
-                //if (Regex.IsMatch(userInput, "^[25-5]?,[25-5]$"))
-                //{
+                if (Regex.IsMatch(userInput, "^([5-9]|[1][0-9]|[2][0-5]),([5-9]|[1][0-9]|[2][0-5])$"))
+                {
                     var userInputSplitted = userInput.Split(',');
                     Kordinat selectedGridSize = new Kordinat();
                     selectedGridSize.X = int.Parse(userInputSplitted[0]);
                     selectedGridSize.Y = int.Parse(userInputSplitted[1]);
                     return selectedGridSize;
-                //}
+                }
             }
         }
 

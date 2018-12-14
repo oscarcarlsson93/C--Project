@@ -15,10 +15,8 @@ namespace LabyrinthGame
 
         private static void TestPrintGrid()
         {
-            
+
             GameEngine game = new GameEngine();
-            game.AddNewPlayerToGame();
-            game.AddNewTargetToGame();
         }
 
         private static void NewGame()
@@ -37,9 +35,12 @@ namespace LabyrinthGame
                         keyPressed = Console.ReadKey(false);
                     } while (!game.KeyPressIsValid(keyPressed));
                     game.TryMovePlayer(player, keyPressed);
+
                     if (game.SomeoneHasWon())
+                    {
                         PrintEngine.PrintWinScreen(game.Players);
                         break;
+                    }
                 }
             }
         }
