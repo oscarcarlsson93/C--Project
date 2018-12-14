@@ -8,13 +8,10 @@ namespace LabyrinthGame
     class Player : LabyrinthObject
     {
         public Kordinat startingPosition;
-        public int Tries { get; set; }
         public int Points { get; set; }
-
 
         public Player(bool defaultValues)
         {
-            Tries = 0;
             Points = 0;
 
             if (defaultValues)

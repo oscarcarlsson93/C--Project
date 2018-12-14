@@ -8,12 +8,6 @@ namespace LabyrinthGame
     class Labyrint
     {
         public SquareStatus[,] Grid { get; set; }
-
-
-
-
-
-
         internal static SquareStatus[,] GenerateBigGridFromFile()
         {
             string[] gridStringArray = System.IO.File.ReadAllLines("../../../grid.txt");
@@ -38,8 +32,6 @@ namespace LabyrinthGame
             }
             return bigGrid;
         }
-
-
 
         internal static SquareStatus[,] GetGrid(Kordinat cord)
         {

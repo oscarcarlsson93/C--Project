@@ -10,10 +10,8 @@ namespace LabyrinthGame
 
         public Target()
         {
-            Name = "EndObjective";
             Color = ConsoleColor.Green;
             Symbol = '☺';
-
         }
 
         public void SetRandomTargetPosition(SquareStatus[,] grid, List<Player> players, List<Target> targets)
