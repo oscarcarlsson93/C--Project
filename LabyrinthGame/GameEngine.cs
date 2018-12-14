@@ -16,10 +16,22 @@ namespace LabyrinthGame
 
         public GameEngine() //Konstruktor
         {
+            SetDefaultGame();
+
             InitializeGameWithStartMenue();
 
             SetStartingPositionsForPlayers();
             SetStartingPositionsForTargets();
+        }
+
+        private void SetDefaultGame()
+        {
+            Players = new List<Player>();
+            Players.Add(new Player(true));
+
+            Grid = Labyrint.GetGrid(new Kordinat() { X = 10, Y = 10 });
+
+            AddTargetsToGame(1);
         }
 
         private void InitializeGameWithStartMenue()
@@ -55,7 +67,7 @@ namespace LabyrinthGame
             Players = new List<Player>();
 
             for (int i = 0; i < numberOfPlayers; i++)
-                Players.Add(new Player());
+                Players.Add(new Player(false));
         }
 
         public void AddTargetsToGame(int numberOfTargets)
