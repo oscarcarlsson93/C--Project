@@ -13,103 +13,121 @@ namespace LabyrinthGame
             Console.SetCursorPosition(0, 0);
             Console.ForegroundColor = color;
 
-            int x = Grid.GetLength(0);
-            int y = Grid.GetLength(1);
+            int labyrinthWidth = Grid.GetLength(0);
+            int labyrinthHeight = Grid.GetLength(1);
 
-
-            List<LabyrinthObject> labyrinthObjects = new List<LabyrinthObject>();
-            labyrinthObjects = labyrinthObjects.Concat(Players).Concat(Targets).ToList();
-
+            List<LabyrinthObject> labyrinthObjects = MergePlayersAndTargets(Players, Targets);
 
             int cordY = 0;
 
-            for (int i = 0; i < y * 2 + 1; i++)
+            for (int lineToPrint = 0; lineToPrint <= labyrinthHeight * 2; lineToPrint++)
             {
                 int cordX = 0;
+                string printLine = "";
 
-                string line = "";
+                printLine = setLeftSideOfGrid(labyrinthHeight, lineToPrint, printLine);
 
-                if (i == 0)
-                    line += "╔";
-
-                else if (i == y * 2)
-                    line += "╚";
-
-                else if (i % 2 != 0)
+                for (int xCoordinatOnLine = 0; xCoordinatOnLine < labyrinthWidth * 2 - 1; xCoordinatOnLine++)
                 {
-                    Console.Write("║");
+                    printLine = setHorisontellLabyrinthWalls(printLine, lineToPrint, xCoordinatOnLine, labyrinthHeight);
+
+
+                    if (lineToPrint % 2 != 0)
+                        cordX = setVerticalLabyrinthWalls(xCoordinatOnLine, labyrinthObjects, cordX, cordY, color);
                 }
 
-                else if (i % 2 == 0)
-                    line += "╠";
+                if (lineToPrint == 0)
+                    printLine += "╗";
 
+                else if (lineToPrint == labyrinthHeight * 2)
+                    printLine += "╝";
 
-                for (int j = 0; j < x * 2 - 1; j++)
-                {
-                    if (i % 2 == 0)
-                    {
-
-
-                        if (j % 2 == 0)
-                            line += "═══";
-
-                        else
-                        {
-                            if (i == 0)
-                                line += "╦";
-
-                            else if (i == y * 2)
-                                line += "╩";
-
-                            else
-                                line += "╬";
-                        }
-
-                    }
-                    if (i % 2 != 0)
-                    {
-
-                        if (j % 2 == 0)
-                        {
-                            if (labyrinthObjects.Any(o => o.Kordinater.X == cordX && o.Kordinater.Y == cordY))
-                            {
-                                var objectToPrint = labyrinthObjects.Find(o => o.Kordinater.X == cordX && o.Kordinater.Y == cordY);
-                                Console.ForegroundColor = objectToPrint.Color;
-                                Console.Write(" " + objectToPrint.Symbol + " ");
-                                Console.ForegroundColor = color;
-                            }
-                            else
-                                Console.Write("   ");
-                            cordX++;
-                        }
-                        else
-                        {
-                            Console.Write("║");
-                        }
-                    }
-                }
-                if (i == 0)
-                    line += "╗";
-
-                else if (i == y * 2)
-                    line += "╝";
-
-                else if (i % 2 != 0)
+                else if (lineToPrint % 2 != 0)
                 {
                     Console.Write("║");
                     cordY++;
-
                 }
 
-                else if (i % 2 == 0)
-                    line += "╣";
+                else if (lineToPrint % 2 == 0)
+                    printLine += "╣";
 
-                Console.WriteLine(line);
-
-
+                Console.WriteLine(printLine);
             }
             PrintGameBar(Players, player);
         }
+
+        private static int setVerticalLabyrinthWalls(int xCoordinatOnLine, List<LabyrinthObject> labyrinthObjects, int cordX, int cordY, ConsoleColor color)
+        {
+            if (xCoordinatOnLine % 2 == 0)
+            {
+                if (labyrinthObjects.Any(o => o.Kordinater.X == cordX && o.Kordinater.Y == cordY))
+                    printLabyrithObjectOrEmptySpace(labyrinthObjects, cordX, cordY, color);
+
+                else
+                    Console.Write("   ");
+
+                cordX++;
+            }
+            else
+                Console.Write("║");
+
+            return cordX;
+        }
+
+        private static void printLabyrithObjectOrEmptySpace(List<LabyrinthObject> labyrinthObjects, int cordX, int cordY, ConsoleColor color)
+        {
+            var objectToPrint = labyrinthObjects.Find(o => o.Kordinater.X == cordX && o.Kordinater.Y == cordY);
+            Console.ForegroundColor = objectToPrint.Color;
+            Console.Write(" " + objectToPrint.Symbol + " ");
+            Console.ForegroundColor = color;
+        }
+
+        private static string setHorisontellLabyrinthWalls(string printLine, int lineToPrint, int xCoordinatOnLine, int labyrinthHeight)
+        {
+            if (lineToPrint % 2 == 0)
+            {
+                if (xCoordinatOnLine % 2 == 0)
+                    printLine += "═══";
+
+                else
+                {
+                    if (lineToPrint == 0)
+                        printLine += "╦";
+
+                    else if (lineToPrint == labyrinthHeight * 2)
+                        printLine += "╩";
+
+                    else
+                        printLine += "╬";
+                }
+
+            }
+            return printLine;
+        }
+
+        private static string setLeftSideOfGrid(int labyrinthHeight, int lineToPrint, string printLine)
+        {
+            if (lineToPrint == 0)
+                printLine += "╔";
+
+            else if (lineToPrint == labyrinthHeight * 2)
+                printLine += "╚";
+
+            else if (lineToPrint % 2 != 0)
+                Console.Write("║");
+
+            else if (lineToPrint % 2 == 0)
+                printLine += "╠";
+
+            return printLine;
+        }
+
+        private static List<LabyrinthObject> MergePlayersAndTargets(List<Player> players, List<Target> targets)
+        {
+            List<LabyrinthObject> labyrinthObjects = new List<LabyrinthObject>();
+            return labyrinthObjects.Concat(players).Concat(targets).ToList();
+        }
+
         public static void PrintGameBar(List<Player> Players, Player activePlayer)
         {
             Console.WriteLine();
@@ -135,7 +153,7 @@ namespace LabyrinthGame
 
             Console.ForegroundColor = activePlayer.Color;
             Console.WriteLine();
-            Console.WriteLine(new string('=', Players.Count*16));
+            Console.WriteLine(new string('=', Players.Count * 16));
             Console.Write(activePlayer.Symbol);
             Console.ForegroundColor = ConsoleColor.Gray;
             Console.Write(" : It's your turn!");
